@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/MtgCustomCardsApp0.2.props" />
+</Project>
