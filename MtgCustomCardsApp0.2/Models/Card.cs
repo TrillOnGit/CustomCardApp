@@ -33,7 +33,7 @@ internal static class ColorHelpers
         { 'R', Color.Red },
         { 'G', Color.Green }
     };
-    
+
     public static Color GetCardColorFromManaCost(string cardManaCost)
     {
         var color = Color.Colorless;
@@ -44,6 +44,7 @@ internal static class ColorHelpers
                 color |= kv.Value;
             }
         }
+
         return color;
     }
 
@@ -51,7 +52,7 @@ internal static class ColorHelpers
     {
         var colorCount = 0;
         var frameColor = AdjustingColor.Colorless;
-        
+
         for (int i = 0; i < Enum.GetNames(typeof(Color)).Length; i++)
         {
             Color bitFlag = (Color)(1 << i);

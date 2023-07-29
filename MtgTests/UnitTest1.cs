@@ -19,4 +19,20 @@ public class UnitTest1
         
         Assert.Equal(expected, actual);
     }
+    
+    [Theory]
+    [InlineData("3GR", AdjustingColor.Red | AdjustingColor.Green)]
+    [InlineData("5WBGRR", AdjustingColor.Gold)]
+    [InlineData("nons3nSe~", AdjustingColor.Colorless)]
+    public void ColorFrameTest(string manaCostText, AdjustingColor expected)
+    {
+        var testCard = new Card
+        {
+            CardManaCost = manaCostText
+        };
+
+        var actual = testCard.FrameColor;
+        
+        Assert.Equal(expected, actual);
+    }
 }
