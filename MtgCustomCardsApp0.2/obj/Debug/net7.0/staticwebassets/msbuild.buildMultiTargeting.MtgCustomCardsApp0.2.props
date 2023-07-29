@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/MtgCustomCardsApp0.2.props" />
+</Project>
