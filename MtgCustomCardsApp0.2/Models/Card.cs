@@ -78,7 +78,7 @@ public class Card
     public string CardName { get; set; }
     
     public string CardManaCost { get; set; }
-    
+
     public Color Color => ColorHelpers.GetCardColorFromManaCost(CardManaCost);
 
     public Uri CardImg { get; set; }

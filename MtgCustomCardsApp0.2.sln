@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{D3A4DCEE-DBA3-4786-B8CC-E2A26FEF06C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtgTests", "MtgTests\MtgTests.csproj", "{D3A4DCEE-DBA3-4786-B8CC-E2A26FEF06C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtgCustomCardsApp0.2", "MtgCustomCardsApp0.2\MtgCustomCardsApp0.2.csproj", "{8E951B69-41AF-46C5-98A1-5499402F3869}"
 EndProject

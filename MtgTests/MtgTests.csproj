@@ -24,7 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MtgCustomCardsApp0.2.csproj" />
       <ProjectReference Include="..\MtgCustomCardsApp0.2\MtgCustomCardsApp0.2.csproj" />
     </ItemGroup>
 
