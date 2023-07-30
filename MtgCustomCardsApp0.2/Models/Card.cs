@@ -23,9 +23,19 @@ public enum AdjustingColor
     Gold = 1 << 5
 }
 
+internal class ManaCost
+{
+    public uint Colorless { get; set; } = 0;
+    public uint White { get; set; } = 0;
+    public uint Blue { get; set; } = 0;
+    public uint Black { get; set; } = 0;
+    public uint Red { get; set; } = 0;
+    public uint Green { get; set; } = 0;
+}
+
 internal static class ColorHelpers
 {
-    public static IDictionary<char, Color> ColorsByChar = new Dictionary<char, Color>()
+    private static readonly IDictionary<char, Color> ColorsByChar = new Dictionary<char, Color>()
     {
         { 'W', Color.White },
         { 'U', Color.Blue },
@@ -53,7 +63,7 @@ internal static class ColorHelpers
         var colorCount = 0;
         var frameColor = AdjustingColor.Colorless;
 
-        for (int i = 0; i < Enum.GetNames(typeof(Color)).Length; i++)
+        for (var i = 0; i < Enum.GetNames(typeof(Color)).Length; i++)
         {
             Color bitFlag = (Color)(1 << i);
             if ((inputColor & bitFlag) == bitFlag)
@@ -70,41 +80,76 @@ internal static class ColorHelpers
 
         return frameColor;
     }
+
+    public static AdjustingColor GetInnerColor(Color inputColor)
+    {
+        var colorCount = 0;
+        var innerColor = AdjustingColor.Colorless;
+
+        for (int i = 0; i < Enum.GetNames(typeof(Color)).Length; i++)
+        {
+            Color bitFlag = (Color)(1 << i);
+            if ((inputColor & bitFlag) == bitFlag)
+            {
+                colorCount++;
+                innerColor |= (AdjustingColor)(1 << i);
+            }
+        }
+
+        if (colorCount >= 2)
+        {
+            return AdjustingColor.Gold;
+        }
+
+        return innerColor;
+    }
+}
+
+internal static class CardCostHelper
+{
+    //TODO: Either give the user a warning when inputting values like "3W4R" instead of "7WR" or account for it and add.
+    public static uint TryGetColorlessMana(string cardManaCost)
+    {
+        var storageString = cardManaCost.Where(char.IsDigit).Aggregate("", (current, t) => current + t);
+        return uint.Parse(storageString);
+    }
 }
 
 public class Card
 {
-    public uint userId { get; set; }
-    
-    public string CardName { get; set; }
-    
-    public string CardManaCost { get; set; }
+    public uint UserId { get; set; } = 0;
 
-    public Color Color => ColorHelpers.GetCardColorFromManaCost(CardManaCost);
+    public string Name { get; set; } = "Default Name";
 
-    public Uri CardImg { get; set; }
+    public string CardManaCost { get; init; } = "0";
     
-    public string CardType { get; set; }
-    
-    public string CardSubType { get; set; }
-    
-    public uint CardId { get; set; }
-    
-    public AdjustingColor FrameColor { get => ColorHelpers.GetFrameColor(Color); }
-    
-    public string CardInnerDesignColor { get; set; }
-    
-    public string CardText { get; set; }
-    
-    public string CardFlavorText { get; set; }
-    
-    public string CardIllustrator { get; set; }
+    public Color ColorsPresent => ColorHelpers.GetCardColorFromManaCost(CardManaCost);
 
-    public char CardRarity { get; set; }
+    public uint ColorlessCost => CardCostHelper.TryGetColorlessMana(CardManaCost);
+
+    //public Uri CardImg { get; set; }
+
+    public string Type { get; set; } = "Default T";
+
+    public string SubType { get; set; } = "Default Sub";
+
+    public uint CardId { get; set; } = 0;
     
-    public uint CardPower { get; set; }
-    
-    public uint CardToughness { get; set; }
-    
-    public bool IsLegendary { get; set; }
+    public AdjustingColor FrameColor => ColorHelpers.GetFrameColor(ColorsPresent);
+
+    public AdjustingColor InnerColor => ColorHelpers.GetInnerColor(ColorsPresent);
+
+    public string CardText { get; set; } = "";
+
+    public string CardFlavorText { get; set; } = "";
+
+    public string Illustrator { get; set; } = "";
+
+    public char Rarity { get; set; }
+
+    public uint Power { get; set; } = 0;
+
+    public uint Toughness { get; set; } = 0;
+
+    public bool IsLegendary { get; set; } = false;
 }
