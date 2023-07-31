@@ -1,131 +1,11 @@
 namespace MtgCustomCardsApp0._2.Models;
 
-[Flags]
-public enum Color
-{
-    Colorless = 0,
-    White = 1,
-    Blue = 1 << 1,
-    Black = 1 << 2,
-    Red = 1 << 3,
-    Green = 1 << 4,
-}
-
-[Flags]
-public enum AdjustingColor
-{
-    Colorless = 0,
-    White = 1,
-    Blue = 1 << 1,
-    Black = 1 << 2,
-    Red = 1 << 3,
-    Green = 1 << 4,
-    Gold = 1 << 5
-}
-
-internal class ManaCost
-{
-    public uint Colorless { get; set; } = 0;
-    public uint White { get; set; } = 0;
-    public uint Blue { get; set; } = 0;
-    public uint Black { get; set; } = 0;
-    public uint Red { get; set; } = 0;
-    public uint Green { get; set; } = 0;
-}
-
-internal static class ColorHelpers
-{
-    private static readonly IDictionary<char, Color> ColorsByChar = new Dictionary<char, Color>()
-    {
-        { 'W', Color.White },
-        { 'U', Color.Blue },
-        { 'B', Color.Black },
-        { 'R', Color.Red },
-        { 'G', Color.Green }
-    };
-
-    public static Color GetCardColorFromManaCost(string cardManaCost)
-    {
-        var color = Color.Colorless;
-        foreach (KeyValuePair<char, Color> kv in ColorsByChar)
-        {
-            if (cardManaCost.Contains(kv.Key))
-            {
-                color |= kv.Value;
-            }
-        }
-
-        return color;
-    }
-
-    public static AdjustingColor GetFrameColor(Color inputColor)
-    {
-        var colorCount = 0;
-        var frameColor = AdjustingColor.Colorless;
-
-        for (var i = 0; i < Enum.GetNames(typeof(Color)).Length; i++)
-        {
-            Color bitFlag = (Color)(1 << i);
-            if ((inputColor & bitFlag) == bitFlag)
-            {
-                colorCount++;
-                frameColor |= (AdjustingColor)(1 << i);
-            }
-        }
-
-        if (colorCount >= 3)
-        {
-            return AdjustingColor.Gold;
-        }
-
-        return frameColor;
-    }
-
-    public static AdjustingColor GetInnerColor(Color inputColor)
-    {
-        var colorCount = 0;
-        var innerColor = AdjustingColor.Colorless;
-
-        for (int i = 0; i < Enum.GetNames(typeof(Color)).Length; i++)
-        {
-            Color bitFlag = (Color)(1 << i);
-            if ((inputColor & bitFlag) == bitFlag)
-            {
-                colorCount++;
-                innerColor |= (AdjustingColor)(1 << i);
-            }
-        }
-
-        if (colorCount >= 2)
-        {
-            return AdjustingColor.Gold;
-        }
-
-        return innerColor;
-    }
-}
-
-internal static class CardCostHelper
-{
-    //TODO: Either give the user a warning when inputting values like "3W4R" instead of "7WR" or account for it and add.
-    public static uint TryGetColorlessMana(string cardManaCost)
-    {
-        var storageString = cardManaCost.Where(char.IsDigit).Aggregate("", (current, t) => current + t);
-        return uint.Parse(storageString);
-    }
-}
 
 public class Card
 {
     public uint UserId { get; set; } = 0;
 
     public string Name { get; set; } = "Default Name";
-
-    public string CardManaCost { get; init; } = "0";
-    
-    public Color ColorsPresent => ColorHelpers.GetCardColorFromManaCost(CardManaCost);
-
-    public uint ColorlessCost => CardCostHelper.TryGetColorlessMana(CardManaCost);
 
     //public Uri CardImg { get; set; }
 
@@ -134,10 +14,6 @@ public class Card
     public string SubType { get; set; } = "Default Sub";
 
     public uint CardId { get; set; } = 0;
-    
-    public AdjustingColor FrameColor => ColorHelpers.GetFrameColor(ColorsPresent);
-
-    public AdjustingColor InnerColor => ColorHelpers.GetInnerColor(ColorsPresent);
 
     public string CardText { get; set; } = "";
 
@@ -152,4 +28,97 @@ public class Card
     public uint Toughness { get; set; } = 0;
 
     public bool IsLegendary { get; set; } = false;
+    public string CardManaCostString { get => CardCost.ToString(); set => CardCost = ManaCost.Parse(value); }
+    
+    public ManaCost CardCost { get; set; } = new();
+    
+    public uint ColorlessCost => CardCost.Colorless;
+
+    public AdjustingColor FrameColor => ColorHelpers.GetFrameColor(CardCost);
+
+    public AdjustingColor InnerColor => ColorHelpers.GetInnerColor(CardCost);
+
 }
+
+
+[Flags]
+public enum AdjustingColor
+{
+    Colorless = 0,
+    White = 1,
+    Blue = 1 << 1,
+    Black = 1 << 2,
+    Red = 1 << 3,
+    Green = 1 << 4,
+    Gold = 1 << 5
+}
+
+internal static class ColorHelpers
+{
+
+    internal static readonly IDictionary<char, Action<ManaCost>> ColorCountByChar = new Dictionary<char, Action<ManaCost>>()
+    {
+        { 'W', c => c.White += 1  },
+        { 'U', c => c.Blue += 1  },
+        { 'B', c => c.Black += 1  },
+        { 'R', c => c.Red += 1 },
+        { 'G', c => c.Green += 1  }
+    };
+    
+    public static AdjustingColor GetFrameColor(ManaCost inputCost)
+    {
+        var colorCount = 0;
+        var frameColor = AdjustingColor.Colorless;
+        var manaCostArr = new[] { inputCost.White, inputCost.Blue, inputCost.Black, inputCost.Red, inputCost.Green };
+
+        for (var i = 0; i < manaCostArr.Length; i++)
+        {
+            if (manaCostArr[i] >= 1)
+            {
+                colorCount++;
+                frameColor |= (AdjustingColor)(1<<i);
+            }
+        }
+        return colorCount >= 3 ? AdjustingColor.Gold : frameColor;
+    }
+    public static AdjustingColor GetInnerColor(ManaCost inputCost)
+    {
+        var colorCount = 0;
+        var frameColor = AdjustingColor.Colorless;
+        var manaCostArr = new[] { inputCost.White, inputCost.Blue, inputCost.Black, inputCost.Red, inputCost.Green };
+
+        for (var i = 0; i < manaCostArr.Length; i++)
+        {
+            if (manaCostArr[i] >= 1)
+            {
+                colorCount++;
+                frameColor |= (AdjustingColor)(1<<i);
+            }
+        }
+        return colorCount >= 2 ? AdjustingColor.Gold : frameColor;
+    }
+}
+
+internal static class CardCostHelper
+{
+    //TODO: Either give the user a warning when inputting values like "3W4R" instead of "7WR" or account for it and add.
+    public static uint TryGetColorlessMana(string cardManaCost)
+    {
+        var storageString = cardManaCost.Where(char.IsDigit).Aggregate("0", (current, t) => current + t);
+        return uint.Parse(storageString);
+    }
+}
+
+
+// public static class Example
+// {
+//     public static void Test()
+//     {
+//         string userInput = "2WW";
+//         var card = new Card
+//         {
+//             CardCost = ManaCost.Parse(userInput)
+//         };
+//         Console.WriteLine(card.CardCost);
+//     }
+// }
