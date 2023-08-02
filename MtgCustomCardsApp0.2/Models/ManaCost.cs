@@ -21,14 +21,14 @@ public class ManaCost
             }
         }
 
-        convertMc.Colorless = CardCostHelper.TryGetColorlessMana(stringInput);
+        convertMc.Colorless = CardCostHelper.GetColorlessMana(stringInput);
 
         return convertMc;
     }
 
     public override string ToString()
     {
-        var convertString = $"{Colorless}";
+        var convertString = $"{(Colorless > 0 ? Colorless : "")}";
         uint[] workArr = { White, Blue, Black, Red, Green };
         char[] charArr = { 'W', 'U', 'B', 'R', 'G' };
 
@@ -39,6 +39,7 @@ public class ManaCost
                 convertString += new string(Enumerable.Repeat(charArr[i], (int)workArr[i]).ToArray());
             }
         }
-        return convertString;
+
+        return convertString != "" ? convertString : "0"; //If there's no mana cost, return 0 instead of nothing.
     }
 }
