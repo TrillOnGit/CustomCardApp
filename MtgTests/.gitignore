@@ -2,3 +2,5 @@ bin/*
 obj/*
 .idea
 *.DotSettings.user
+app.db-shm
+app.db-wal
