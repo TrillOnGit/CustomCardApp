@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtgTests", "MtgTests\MtgTests.csproj", "{D3A4DCEE-DBA3-4786-B8CC-E2A26FEF06C9}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtgTests", "MtgTests\MtgTests.csproj", "{D3A4DCEE-DBA3-4786-B8CC-E2A26FEF06C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtgCustomCardsApp0.2", "MtgCustomCardsApp0.2\MtgCustomCardsApp0.2.csproj", "{8E951B69-41AF-46C5-98A1-5499402F3869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtgCustomCardsApp0.2", "MtgCustomCardsApp0.2\MtgCustomCardsApp0.2.csproj", "{8E951B69-41AF-46C5-98A1-5499402F3869}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +21,8 @@ Global
 		{8E951B69-41AF-46C5-98A1-5499402F3869}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E951B69-41AF-46C5-98A1-5499402F3869}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E951B69-41AF-46C5-98A1-5499402F3869}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
