@@ -1,10 +1,29 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "MTG Card Creator";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MTG Card Creator</title>
+</head>
+
+<body>
+
+    <h1>Magic the Gather Card Creator</h1>
+    <p>If you're looking to create your own MTG custom card, look no further!</p>   
+
+    <p>Note that colorless mana must come first as a number, followed by any other mana type (repeat letters if multiple). </p>
+    <p id="mana-cost-paragraph">Follow the example below to adhere to our requirements, otherwise some pieces will be missing:</p>
+    <p id="mana-cost-paragraph">3URB - This equates to: 3 Colorless, Blue, Red and Black.</p>
+    <p id="mana-cost-paragraph">5WWGGG - This equates to: 5 Colorless, 2 White and 3 Green.</p>
+    <p id="mana-cost-paragraph">For no colorless mana, put 0 or keep it blank: Eg. 0WB or URB.</p>
+
+</body>
+
+</html>

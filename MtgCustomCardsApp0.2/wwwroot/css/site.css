@@ -2,21 +2,52 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   html {
     font-size: 16px;
   }
-}
+}*/
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+/*.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}*/
 
-html {
-  position: relative;
-  min-height: 100%;
+/*html {
+    position: relative;
+    min-height: 100%;
 }
-
+*/
 body {
-  margin-bottom: 60px;
+    color: aliceblue;
+    /*margin-bottom: 60px;*/
+    background-color: #020d00;
+    font-family: 'Beleren2016 Small Caps';
+}
+
+
+#create-btn {
+    color: black;
+    background-color: #adb5bd;
+    /*margin-top: 50px;*/
+}
+
+#delete-btn {
+    color: #f9fffb;
+    background-color: black;
+}
+
+
+#card-image-field, #create-btn {
+    display: block;
+    /*margin: 15px;*/
+    text-align: center;
+    align-self: center;
+}
+
+
+#card-text, #card-flavor-text {
+    /*margin: 20px;*/
+    display: block;
+    background-color: black;
+    color: white;
 }
