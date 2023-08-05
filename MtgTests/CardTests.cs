@@ -8,6 +8,7 @@ public class CardColorTests
     [InlineData("3WU", 5)]
     [InlineData("5WBGRR", 10)]
     [InlineData("WB", 2)]
+    [InlineData("0WB", 2)]
     public void ColorTest(string manaCostText, uint expected)
     {
         var testCard = new Card

@@ -23,9 +23,9 @@ public class Card
 
     public char Rarity { get; set; }
 
-    public uint Power { get; set; } = 0;
+    public string Power { get; set; } = "";
 
-    public uint Toughness { get; set; } = 0;
+    public string Toughness { get; set; } = "";
 
     public bool IsLegendary { get; set; } = false;
     public string CardManaCostString { get => CardCost.ToString(); set => CardCost = ManaCost.Parse(value); }
