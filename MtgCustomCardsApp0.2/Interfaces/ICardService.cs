@@ -14,6 +14,6 @@ public interface ICardService
     Task UpdateCard(Card card);
     
     //Delete
-    Task DeleteCard(uint cardId);
+    Task DeleteCard(Card card);
 }
 

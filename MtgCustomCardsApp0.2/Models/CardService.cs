@@ -16,42 +16,42 @@ public class CardService : ICardService
     public async Task CreateCard(Card card)
     {
         await _conn.ExecuteAsync(
-            "INSERT INTO CardData (CARDNAME, CARDTEXT, CardFlavorText, CardIllustrator) VALUES (@name, @text, @flavor, @illustrator);",
+            "INSERT INTO CardData (CardName, CARDTEXT, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
+            "cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @text, @flavor, " +
+            "@illustrator, @rarity, @type, @subType, @power, @toughness, @isLegendary, @white, @blue, @black, " +
+            "@red, @green, @colorless);",
             new
             {
-                name = card.Name, text = card.CardText, flavor = card.CardFlavorText, illustrator = card.Illustrator
-            });
-        await _conn.ExecuteAsync(
-            "INSERT INTO CardData (cardRARITY, cardTYPE, cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY) VALUES " +
-            "(@rarity, @type, @subType, @power, @toughness, @isLegendary);",
-            new
-            {
+                name = card.Name, text = card.CardText, flavor = card.CardFlavorText, illustrator = card.Illustrator,
                 rarity = card.Rarity, type = card.Type, subType = card.SubType, power = card.Power,
-                toughness = card.Toughness, isLegendary = card.IsLegendary
-            });
-        await _conn.ExecuteAsync(
-            "INSERT INTO CardData (W, U, B, R, G, C) VALUES " +
-            "(@white, @blue, @black, @red, @green, @colorless);",
-            new
-            {
-                white = card.CardCost.White, blue = card.CardCost.Blue, black = card.CardCost.Black, 
-                red = card.CardCost.Red, green = card.CardCost.Green, colorless = card.CardCost.Colorless
+                toughness = card.Toughness, isLegendary = card.IsLegendary, white = card.CardCost.White, 
+                blue = card.CardCost.Blue, black = card.CardCost.Black, red = card.CardCost.Red, 
+                green = card.CardCost.Green, colorless = card.CardCost.Colorless
             });
     }
 
     public async Task<IEnumerable<Card>> GetCardsForUser(uint userId)
     {
-        return await _conn.QueryAsync<Card>("SELECT CardName, CardText, CardType, CardSubType, CardPower, CardToughness FROM CardData");
+        return await _conn.QueryAsync<Card>(
+            "SELECT CardName, CardText, CardType, CardSubType, CardPower, CardToughness FROM CardData");
     }
 
-    public Task UpdateCard(Card card)
+    public async Task UpdateCard(Card card)
     {
-        _conn.ExecuteAsync("UPDATE CardData")
-        throw new NotImplementedException();
+        await _conn.ExecuteAsync(
+            "UPDATE CardData SET CardName = @name, CardType = @type, CardSubType = @subtype, CardPower = @power, " +
+            "CardToughness = @toughness, CardText = @text, CardFlavorText = @flavor, CardIllustrator = @illustrator, " +
+            "W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
+            new {name = card.Name, type = @card.Type, subtype = @card.SubType, power = @card.Power, 
+                toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText, 
+                illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue, 
+                black = card.CardCost.Black, red = card.CardCost.Red, green = card.CardCost.Green, 
+                colorless = card.CardCost.Colorless, id = card.CardId
+            });
     }
 
-    public Task DeleteCard(uint cardId)
+    public async Task DeleteCard(Card card)
     {
-        throw new NotImplementedException();
+        await _conn.ExecuteAsync("DELETE FROM CardData WHERE CardID = @id;", new { id = card.CardId });
     }
 }
