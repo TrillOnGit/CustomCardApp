@@ -1,0 +1,37 @@
+@model MtgCustomCardsApp0._2.Models.Card
+
+
+<h3>@Model.Name Information</h3>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Power</th>
+        <th>Toughness</th>
+        <th>Text</th>
+        <th>Type</th>
+        <th>SubType</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.Power</td>
+        <td>@Model.Toughness</td>
+        <td>@Model.CardText</td>
+        <td>@Model.Type</td>
+        <td>@Model.SubType</td>
+    </tr>
+</table>
+
+<div style="display: block">
+    <a href="/Product/UpdateCard/@Model.ProductId">Update this Product</a>
+</div>
+
+<div style="display: block">
+
+    @using (Html.BeginForm("DeleteProduct", "Product", "Post"))
+    {
+        <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
+    }
+</div>

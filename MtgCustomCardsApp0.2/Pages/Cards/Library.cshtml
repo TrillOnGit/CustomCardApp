@@ -1,0 +1,33 @@
+@model IEnumerable<MtgCustomCardsApp0._2.Models.Card>
+
+<h2>Library</h2>
+
+<div style="display: block">
+     <a href="/CardCreator/">Create a New Card!</a>
+ </div>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Power</th>
+        <th>Toughness</th>
+        <th>Text</th>
+        <th>Type</th>
+        <th>SubType</th>
+    </tr>
+
+    @foreach (var card in @Model)
+    {
+        <tr>
+            <td><a href=/Cards/ViewCard/@card.CardId>@card.CardId</a></td>
+            <td>@card.Name</td>
+            <td>@card.Power</td>
+            <td>@card.Toughness</td>
+            <td>@card.CardText</td>
+            <td>@card.Type</td>
+            <td>@card.SubType</td>
+        </tr>
+    }
+
+</table>

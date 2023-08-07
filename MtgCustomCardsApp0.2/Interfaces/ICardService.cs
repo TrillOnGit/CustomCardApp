@@ -6,6 +6,8 @@ public interface ICardService
 {
     //Read
     Task<IEnumerable<Card>> GetCardsForUser(uint userId);
+
+    Task<Card> GetCard(int cardId);
     
     //Create
     Task CreateCard(Card card); //Ignore cardId in implementation, increment instead
