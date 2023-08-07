@@ -4,13 +4,13 @@
 
 @using (Html.BeginForm("", "Cards", "Post"))
 {
-    <input asp-for="ProductId" type="hidden" value="@Model.ProductId" />
+    <input asp-for="CardId" type="hidden" value="@Model.CardId" />
 
     <label asp-for="Name" class="control-label">Name</label>
     <input type="text" name="Name" class="form-control" value="@Model.Name" />
 
-    <label asp-for="Price" class="control-label">Price</label>    
-    <input type="number" step="0.01" name="Price" class="form-control" value="@Model.Price" />
+    <label asp-for="CardText" class="control-label">Text</label>    
+    <input type="number" step="0.01" name="Text" class="form-control" value="@Model.CardText" />
 
-    <input type="submit" value="Update Product" class="btn btn-primary" />
+    <input type="submit" value="Update Card" class="btn btn-primary" />
 }

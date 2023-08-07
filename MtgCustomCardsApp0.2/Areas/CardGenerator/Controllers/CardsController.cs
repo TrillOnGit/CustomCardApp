@@ -26,45 +26,23 @@ public class CardsController : Controller
         return View(card);
     }
         
-    public async Task<IActionResult> UpdateProduct(int cardId)
+    public async Task<IActionResult> UpdateCard(int cardId)
     {
-        Task<Card> prod = _repo.GetCard(cardId);
-        if (prod == null)
-        {
-            return View("Index");
-        }
-        return View(prod);
+        var card = await _repo.GetCard(cardId);
+        return View(card);
     }
 
-    public IActionResult UpdateProductToDatabase(Product product)
+    public async Task<IActionResult> UpdateCardToDatabase(Card card)
     {
-        _repo.UpdateProduct(product);
+        await _repo.UpdateCard(card);
 
-        return RedirectToAction("ViewProduct", new { id = product.ProductId });
+        return RedirectToAction("ViewCard", new { id = card.CardId });
     }
-        
-    public IActionResult InsertProduct()
+    
+    public async Task<IActionResult> DeleteCard(Card card)
     {
-        var prod = _repo.AssignCategory();
-        return View(prod);
-    }
-        
-    public IActionResult InsertProductToDatabase(Product productToInsert)
-    {
-        _repo.InsertProduct(productToInsert);
-        return RedirectToAction("Index");
-    }
-        
-    public IActionResult DeleteProduct(Product product)
-    {
-        _repo.DeleteProduct(product);
-        return RedirectToAction("Index");
+        await _repo.DeleteCard(card);
+        return RedirectToAction("Library");
     }
 
-}
-
-    // public IActionResult Index()
-    // {
-    //     var 
-    // }
 }
