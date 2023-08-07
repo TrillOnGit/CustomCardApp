@@ -1,14 +1,24 @@
+using System.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using MtgCustomCardsApp0._2.Data;
 using Microsoft.Extensions.DependencyInjection;
+using MtgCustomCardsApp0._2.Interfaces;
+using MtgCustomCardsApp0._2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddScoped<IDbConnection>((s) =>
+{
+    IDbConnection conn = new SqliteConnection(connectionString);
+    conn.Open();
+    return conn;
+});
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -21,6 +31,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
+builder.Services.AddMvc();
+builder.Services.AddScoped<ICardService, CardService>();
 
 var app = builder.Build();
 
@@ -44,5 +56,9 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
