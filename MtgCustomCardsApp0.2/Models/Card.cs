@@ -28,6 +28,7 @@ public class Card
     public string Toughness { get; set; } = "";
 
     public bool IsLegendary { get; set; } = false;
+    
     public string CardManaCostString { get => CardCost.ToString(); set => CardCost = ManaCost.Parse(value); }
     
     public ManaCost CardCost { get; set; } = new();
@@ -37,7 +38,6 @@ public class Card
     public AdjustingColor FrameColor => ColorHelpers.GetFrameColor(CardCost);
 
     public AdjustingColor InnerColor => ColorHelpers.GetInnerColor(CardCost);
-
 }
 
 
