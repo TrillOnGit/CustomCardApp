@@ -9,6 +9,28 @@
 }
 
 #card-name, #mana-cost, #card-type, #card-sub-type, #card-text, #card-flavor-text,
-#card-power, #card-toughness, #card-illus, #create-btn {
+#card-power, #card-toughness, #card-illus, #card-rarity, #create-btn {
     color: white;
+}
+
+form {
+    display: inline-block;
+}
+
+.field {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+label {
+    color: white;
+    order: -1;
+    padding-left: 10px;
+    transition: all 0.3s ease-in;
+    transform: translateY(-30px);
+    pointer-events: none;
+}
+
+input:focus + label {
+    transform: translateY(5px);
 }

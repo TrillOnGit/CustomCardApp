@@ -53,7 +53,7 @@ namespace MtgCustomCardsApp0._2.Data.Migrations
                     table.ForeignKey(
                         name: "FK_ManaCost_Cards_CardId",
                         column: x => x.CardId,
-                        principalTable: "Cards",
+                        principalTable: "CardData",
                         principalColumn: "CardId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -66,7 +66,7 @@ namespace MtgCustomCardsApp0._2.Data.Migrations
                 name: "ManaCost");
 
             migrationBuilder.DropTable(
-                name: "Cards");
+                name: "CardData");
         }
     }
 }

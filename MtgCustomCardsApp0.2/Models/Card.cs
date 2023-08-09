@@ -9,32 +9,32 @@ public class Card
     public uint CardId { get; set; } = 0;
     public uint UserId { get; set; } = 0;
 
-    public string Name { get; set; } = "Default Name";
+    public string Name { get; set; }
 
     public string CardImg { get; set; }
 
-    public string Type { get; set; } = "Default T";
+    public string Type { get; set; }
 
-    public string SubType { get; set; } = "Default Sub";  
+    public string SubType { get; set; } 
 
-    public string CardText { get; set; } = "";
+    public string CardText { get; set; }
 
-    public string CardFlavorText { get; set; } = "";
+    public string CardFlavorText { get; set; }
 
-    public string Illustrator { get; set; } = "";
+    public string Illustrator { get; set; }
 
     public char Rarity { get; set; }
 
-    public string Power { get; set; } = "";
+    public string Power { get; set; }
 
-    public string Toughness { get; set; } = "";
+    public string Toughness { get; set; }
 
     public bool IsLegendary { get; set; } = false;
-    
+
     public string CardManaCostString { get => CardCost.ToString(); set => CardCost = ManaCost.Parse(value); }
-    
+
     public ManaCost CardCost { get; set; } = new();
-    
+
     public uint ColorlessCost => CardCost.Colorless;
 
     public AdjustingColor FrameColor => ColorHelpers.GetFrameColor(CardCost);

@@ -2,26 +2,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MtgCustomCardsApp0._2.Data;
 using MtgCustomCardsApp0._2.Models;
+using MtgCustomCardsApp0._2.Models.ViewModels;
 
 namespace MtgCustomCardsApp0._2.Pages
 {
     public class CardCreatorModel : PageModel
     {
         private readonly ApplicationDbContext dbContext;
-
         public CardCreatorModel(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
         [BindProperty]
-        public Card CreateCardRequest { get; set; }
+        public CreateCardViewModel CreateCardRequest { get; set; }          
 
 
         public void OnGet()
         {
         }
-
+        //In OnPost: CreateCardViewModel model
         public void OnPost()
         {
             // Convert ViewModel to DomainModel
@@ -38,11 +38,13 @@ namespace MtgCustomCardsApp0._2.Pages
                 CardImg = CreateCardRequest.CardImg,
                 CardText = CreateCardRequest.CardText,
                 CardFlavorText = CreateCardRequest.CardFlavorText,
-                Illustrator = CreateCardRequest.Illustrator
+                Illustrator = CreateCardRequest.Illustrator,
             };
 
-            dbContext.CardData.Add(cardDomainModel);
+            dbContext.CardData.AddAsync(cardDomainModel);
             dbContext.SaveChanges();
+
+            ViewData["Message"] = "Card successfully created!";
         }
     }
 }

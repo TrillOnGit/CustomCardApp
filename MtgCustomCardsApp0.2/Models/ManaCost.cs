@@ -18,7 +18,7 @@ public class ManaCost
         var convertMc = new ManaCost();
         foreach (char elem in stringInput)
         {
-            if (ColorHelpers.ColorCountByChar.Keys.Contains(elem))
+            if (ColorHelpers.ColorCountByChar.ContainsKey(elem))
             {
                 var action = ColorHelpers.ColorCountByChar[elem];
                 action(convertMc);

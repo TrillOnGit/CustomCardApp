@@ -16,8 +16,8 @@ public class CardService : ICardService
     public async Task CreateCard(Card card)
     {
         await _conn.ExecuteAsync(
-            "INSERT INTO CardData (CardName, CARDTEXT, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
-            "cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @text, @flavor, " +
+            "INSERT INTO CardData (Name, CARDTEXT, CardFlavorText, Illustrator, RARITY, TYPE, " +
+            "SUBTYPE, POWER, TOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @text, @flavor, " +
             "@illustrator, @rarity, @type, @subType, @power, @toughness, @isLegendary, @white, @blue, @black, " +
             "@red, @green, @colorless);",
             new
@@ -33,20 +33,20 @@ public class CardService : ICardService
     public async Task<IEnumerable<Card>> GetCardsForUser(uint userId)
     {
         return await _conn.QueryAsync<Card>(
-            "SELECT CardName, CardText, CardType, CardSubType, CardPower, CardToughness FROM CardData");
+            "SELECT Name, CardText, Type, SubType, Power, Toughness FROM CardData");
     }
     
     public async Task<Card> GetCard(int id)
     {
-        return await _conn.QuerySingleAsync<Card>("SELECT * FROM CardData WHERE CardID = @id", new { id = id });
+        return await _conn.QuerySingleAsync<Card>("SELECT * FROM CardData WHERE CardId = @id", new { id = id });
     }
 
     public async Task UpdateCard(Card card)
     {
         await _conn.ExecuteAsync(
-            "UPDATE CardData SET CardName = @name, CardType = @type, CardSubType = @subtype, CardPower = @power, " +
-            "CardToughness = @toughness, CardText = @text, CardFlavorText = @flavor, CardIllustrator = @illustrator, " +
-            "W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
+            "UPDATE CardData SET Name = @name, Type = @type, SubType = @subtype, Power = @power, " +
+            "Toughness = @toughness, CardText = @text, CardFlavorText = @flavor, Illustrator = @illustrator, " +
+            "W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardId = @id",
             new {name = card.Name, type = @card.Type, subtype = @card.SubType, power = @card.Power, 
                 toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText, 
                 illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue, 
@@ -57,6 +57,6 @@ public class CardService : ICardService
 
     public async Task DeleteCard(Card card)
     {
-        await _conn.ExecuteAsync("DELETE FROM CardData WHERE CardID = @id;", new { id = card.CardId });
+        await _conn.ExecuteAsync("DELETE FROM CardData WHERE CardId = @id;", new { id = card.CardId });
     }
 }

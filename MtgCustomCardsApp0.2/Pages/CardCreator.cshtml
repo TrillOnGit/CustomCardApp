@@ -1,6 +1,9 @@
 ﻿@page
 @model MtgCustomCardsApp0._2.Pages.CardCreatorModel
 @{
+
+    var message = ViewData["Message"]?.ToString();
+
 }
 
 
@@ -19,24 +22,31 @@
 <body>
     <h1 class="text-center display-3">Magic the Gather Card Creation Template</h1>
 
+    @if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="alert alert-success" role="alert">
+            @message
+        </div>
+    }
+
     <div class="container d-flex align-items-center justify-content-center">
         <div class="card">
             <div class="card-body">
                 <form method="post">
 
                     <!-- 2 column grid layout with text inputs for card name and mana cost -->
-                    <div class="container-fluid mt-1">
+                    <div class="container-fluid mt-1 mb-4">
                         <div class="row">
                             <div class="col-sm-6 p-6">
                                 <fieldset class="form-outline">
-                                    <input id="card-name" class="form-control bg-dark" name="card-name" type="text" maxlength="22" asp-for="CreateCardRequest.Name" required />
-                                    <label class="form-label" for="card-name">Card Name</label>
+                                    <input id="card-name" class="form-control bg-dark" type="text" maxlength="22" asp-for="CreateCardRequest.Name" />
+                                    <label for="card-name">Card Name</label>
                                 </fieldset>
                             </div>
 
                             <div class="col-sm-6 p-6">
                                 <fieldset id="mana-cost">
-                                    <input id="mana-cost" class="form-control bg-dark" name="mana-cost" type="text" maxlength="22" asp-for="CreateCardRequest.CardManaCostString" required />
+                                    <input id="mana-cost" class="form-control bg-dark"type="text" maxlength="22" asp-for="CreateCardRequest.CardManaCostString" />
                                     <label for="mana-cost">Mana Cost</label>
                                 </fieldset>
                             </div>
@@ -55,14 +65,14 @@
                         <div class="row">
                             <div class="col-sm-6 p-6">
                                 <fieldset class="form-outline mb-4">
-                                    <input id="card-type" class="form-control bg-dark" name="card-type" type="text" maxlength="22" asp-for="CreateCardRequest.Type"/>
+                                    <input id="card-type" class="form-control bg-dark" type="text" maxlength="22" asp-for="CreateCardRequest.Type"/>
                                     <label for="card-type">Card Type</label>
                                 </fieldset>
                             </div>
 
                             <div class="col-sm-6 p-6">
                                 <fieldset class="form-outline mb-4">
-                                    <input id="card-sub-type" class="form-control bg-dark" name="card-sub-type" type="text" maxlength="22" asp-for="CreateCardRequest.SubType"/>
+                                    <input id="card-sub-type" class="form-control bg-dark" type="text" maxlength="22" asp-for="CreateCardRequest.SubType"/>
                                     <label for="card-sub-type">Card Sub-Type</label>
                                 </fieldset>
                             </div>
@@ -72,7 +82,7 @@
                     <div class="container-fluid mt-3">
                         <div class="row">
                             <fieldset id="card-text-field">
-                                <textarea class="col-sm-12 p-12 bg-secondary" id="card-text" name="card-text" maxlength="266" asp-for="CreateCardRequest.CardText"></textarea>
+                                <textarea class="col-sm-12 p-12 bg-secondary" id="card-text" maxlength="266" asp-for="CreateCardRequest.CardText"></textarea>
                                 <label for="card-text">Card Text</label>
                             </fieldset>
                         </div>
@@ -81,7 +91,7 @@
                     <div class="container-fluid mt-3">
                         <div class="row">
                             <fieldset id="card-flavor-text-field">
-                                <textarea class="col-sm-12 p-12 bg-secondary" id="card-flavor-text" name="card-flavor-text" maxlength="82" asp-for="CreateCardRequest.CardFlavorText"></textarea>
+                                <textarea class="col-sm-12 p-12 bg-secondary" id="card-flavor-text"  maxlength="82" asp-for="CreateCardRequest.CardFlavorText"></textarea>
                                 <label for="card-flavor-text">Card Flavor Text</label>
                             </fieldset>
                         </div>
@@ -91,14 +101,14 @@
                         <div class="row">
                             <div class="col-sm-6 p-6">
                                 <fieldset class="form-outline mb-4">
-                                    <input id="card-power" class="form-control bg-dark" name="card-power" type="text" maxlength="22" asp-for="CreateCardRequest.Power"/>
+                                    <input id="card-power" class="form-control bg-dark" type="text" maxlength="2" asp-for="CreateCardRequest.Power"/>
                                     <label for="card-power">Power</label>
                                 </fieldset>
                             </div>
 
                             <div class="col-sm-6 p-6">
                                 <fieldset class="form-outline mb-4">
-                                    <input id="card-toughness" class="form-control bg-dark" name="card-toughness" type="text" maxlength="22" asp-for="CreateCardRequest.Toughness"/>
+                                    <input id="card-toughness" class="form-control bg-dark"  type="text" maxlength="2" asp-for="CreateCardRequest.Toughness"/>
                                     <label for="card-toughness">Toughness</label>
                                 </fieldset>
                             </div>
@@ -109,14 +119,14 @@
                         <div class="row">
                             <div class="col-sm-1 p-1">
                                 <fieldset class="form-outline mb-4">
-                                    <input id="card-isLegendary" class="form-control bg-dark" name="card-isLegendary" type="checkbox" asp-for="CreateCardRequest.IsLegendary"/>
-                                    <label for="card-power">Legendary?</label>
+                                    <input id="card-isLegendary" class="form-control" type="checkbox" asp-for="CreateCardRequest.IsLegendary"/>
+                                    <label for="card-isLegendary">Legendary?</label>
                                 </fieldset>
                             </div>
 
-                            <div class="col-sm-6 p-6">
+                            <div class="col-sm-3 p-3">
                                 <fieldset class="form-outline mb-4">
-                                    <input id="card-rarity" class="form-control bg-dark" name="card-rarity" type="text" maxlength="32" asp-for="CreateCardRequest.Rarity"/>
+                                    <input id="card-rarity" class="form-control bg-dark"  type="text" maxlength="1" asp-for="CreateCardRequest.Rarity"/>
                                     <label for="card-rarity">Rarity</label>
                                 </fieldset>
                             </div>
@@ -125,7 +135,7 @@
 
                     <div class="align-items-center justify-content-center">
                         <fieldset class="form-outline mb-2">
-                            <input id="card-illus" class="form-control bg-dark" name="card-illus" type="text" maxlength="31" />
+                            <input id="card-illus" class="form-control bg-dark" type="text" maxlength="31" asp-for="CreateCardRequest.Illustrator"/>
                             <label for="card-illus">Illustrator</label>
                         </fieldset>
                     </div>
