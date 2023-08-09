@@ -11,6 +11,8 @@ using MtgCustomCardsApp0._2.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddScoped<IDbConnection>((s) =>
@@ -30,7 +32,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddRazorPages();
+
 builder.Services.AddMvc();
 builder.Services.AddScoped<ICardService, CardService>();
 

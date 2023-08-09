@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MtgCustomCardsApp0._2.Models;
 
 public class ManaCost
 {
+    [Key]
+    public uint CardId { get; set; } = 0;
     public uint Colorless { get; set; } = 0;
     public uint White { get; set; } = 0;
     public uint Blue { get; set; } = 0;

@@ -1,19 +1,21 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MtgCustomCardsApp0._2.Models;
 
 
 public class Card
 {
+    [Key]
+    public uint CardId { get; set; } = 0;
     public uint UserId { get; set; } = 0;
 
     public string Name { get; set; } = "Default Name";
 
-    //public Uri CardImg { get; set; }
+    public string CardImg { get; set; }
 
     public string Type { get; set; } = "Default T";
 
-    public string SubType { get; set; } = "Default Sub";
-
-    public uint CardId { get; set; } = 0;
+    public string SubType { get; set; } = "Default Sub";  
 
     public string CardText { get; set; } = "";
 
