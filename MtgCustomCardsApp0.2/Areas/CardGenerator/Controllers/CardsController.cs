@@ -24,7 +24,18 @@ public class CardsController : Controller
         //0 as a test ID, remember to remove this
         return View(cards);
     }
-        
+
+    public IActionResult CardCreator()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> InsertCardToDatabase(Card card)
+    {
+        await _repo.CreateCard(card);
+        return RedirectToAction("Library");
+    }
+    
     public async Task<IActionResult> ViewCard(int id)
     {
         var card = await _repo.GetCard(id);
