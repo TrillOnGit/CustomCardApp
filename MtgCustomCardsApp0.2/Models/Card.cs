@@ -38,6 +38,7 @@ public class Card
     public AdjustingColor FrameColor => ColorHelpers.GetFrameColor(CardCost);
 
     public AdjustingColor InnerColor => ColorHelpers.GetInnerColor(CardCost);
+
 }
 
 

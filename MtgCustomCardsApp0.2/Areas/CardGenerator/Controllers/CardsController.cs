@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MtgCustomCardsApp0._2.Interfaces;
@@ -13,22 +15,25 @@ public class CardsController : Controller
     {
         this._repo = repo;
     }
+    
+    [Authorize]
     public async Task<IActionResult> Library()
     {
-        var cards = await _repo.GetCardsForUser(userId:0);
+        string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var cards = await _repo.GetCardsForUser(0);
         //0 as a test ID, remember to remove this
         return View(cards);
     }
         
-    public async Task<IActionResult> ViewCard(int cardId)
+    public async Task<IActionResult> ViewCard(int id)
     {
-        var card = await _repo.GetCard(cardId);
+        var card = await _repo.GetCard(id);
         return View(card);
     }
         
-    public async Task<IActionResult> UpdateCard(int cardId)
+    public async Task<IActionResult> UpdateCard(int id)
     {
-        var card = await _repo.GetCard(cardId);
+        var card = await _repo.GetCard(id);
         return View(card);
     }
 

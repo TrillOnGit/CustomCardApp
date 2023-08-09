@@ -10,7 +10,7 @@ public interface ICardService
     Task<Card> GetCard(int cardId);
     
     //Create
-    Task CreateCard(Card card); //Ignore cardId in implementation, increment instead
+    Task CreateCard(Card card); 
     
     //Update
     Task UpdateCard(Card card);

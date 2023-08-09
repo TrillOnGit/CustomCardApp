@@ -33,12 +33,12 @@ public class CardService : ICardService
     public async Task<IEnumerable<Card>> GetCardsForUser(uint userId)
     {
         return await _conn.QueryAsync<Card>(
-            "SELECT CardName, CardText, CardType, CardSubType, CardPower, CardToughness FROM CardData");
+            "SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData");
     }
     
     public async Task<Card> GetCard(int id)
     {
-        return await _conn.QuerySingleAsync<Card>("SELECT * FROM CardData WHERE CardID = @id", new { id = id });
+        return await _conn.QuerySingleAsync<Card>("SELECT * FROM CardData WHERE CardID = @id", new { id });
     }
 
     public async Task UpdateCard(Card card)
