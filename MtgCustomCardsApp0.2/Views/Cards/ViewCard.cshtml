@@ -14,6 +14,7 @@
         <th>SubType</th>
     </tr>
     <tr>
+        <td>@Model.CardId</td>
         <td>@Model.Name</td>
         <td>@Model.Power</td>
         <td>@Model.Toughness</td>
@@ -31,7 +32,9 @@
 
     @using (Html.BeginForm("DeleteCard", "Cards", "Post"))
     {
-        <input type="hidden" asp-for="CardId" value="@Model.CardId" />
-        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this card" />
+        <form>
+            <input type="hidden" asp-for="CardId" name="CardId" value="@Model.CardId" />
+            <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this card" />
+        </form>
     }
 </div>

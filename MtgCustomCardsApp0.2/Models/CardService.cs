@@ -38,7 +38,7 @@ public class CardService : ICardService
     
     public async Task<Card> GetCard(int id)
     {
-        return await _conn.QuerySingleAsync<Card>("SELECT * FROM CardData WHERE CardID = @id", new { id });
+        return await _conn.QuerySingleAsync<Card>("SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData WHERE CardID = @id", new { id });
     }
 
     public async Task UpdateCard(Card card)

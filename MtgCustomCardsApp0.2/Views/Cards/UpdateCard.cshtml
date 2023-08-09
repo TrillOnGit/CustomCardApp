@@ -4,8 +4,7 @@
 
 @using (Html.BeginForm("UpdateCardToDatabase", "Cards", "Post"))
 {
-    <input asp-for="CardId" type="hidden" value="@Model.CardId" />
-
+    
     <label asp-for="Name" class="control-label">Name</label>
     <input type="text" name="Name" class="form-control" value="@Model.Name" />
 
@@ -17,6 +16,7 @@
                                                                                              
     @* <label asp-for="CardManaCostString" class="control-label">New Mana Cost</label>     *@
     @* <input type="number" step="0.01" name="Text" class="form-control" value="@Model.CardManaCostString" /> *@
-                                                                                                        
+                    
+    <input asp-for="CardId" type="hidden" value="@Model.CardId" name="CardId"/>
     <input type="submit" value="Update Card" class="btn btn-primary" />
 }
