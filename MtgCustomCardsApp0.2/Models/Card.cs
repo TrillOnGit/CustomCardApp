@@ -1,3 +1,5 @@
+using MtgCustomCardsApp0._2.Models.Images;
+using SQLitePCL;
 using System.ComponentModel.DataAnnotations;
 
 namespace MtgCustomCardsApp0._2.Models;
@@ -6,12 +8,12 @@ namespace MtgCustomCardsApp0._2.Models;
 public class Card
 {
     [Key]
-    public uint CardId { get; set; } = 0;
+    public uint CardId { get; set; }
     public uint UserId { get; set; } = 0;
 
     public string Name { get; set; }
 
-    public string CardImg { get; set; }
+    public ImageInputModel CardImg { get; set; }
 
     public string Type { get; set; }
 

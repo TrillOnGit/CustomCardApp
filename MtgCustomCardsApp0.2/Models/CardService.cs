@@ -59,4 +59,6 @@ public class CardService : ICardService
     {
         await _conn.ExecuteAsync("DELETE FROM CardData WHERE CardId = @id;", new { id = card.CardId });
     }
+
+
 }

@@ -7,6 +7,7 @@ using MtgCustomCardsApp0._2.Data;
 using Microsoft.Extensions.DependencyInjection;
 using MtgCustomCardsApp0._2.Interfaces;
 using MtgCustomCardsApp0._2.Models;
+using MtgCustomCardsApp0._2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,11 +25,14 @@ builder.Services.AddScoped<IDbConnection>((s) =>
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddTransient<IImageService, ImageService>();
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
         options.SignIn.RequireConfirmedEmail = false;
         options.SignIn.RequireConfirmedPhoneNumber = false;
+
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 

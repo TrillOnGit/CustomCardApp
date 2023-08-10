@@ -13,11 +13,10 @@ public class CardsController : Controller
     {
         this._repo = repo;
     }
-    public async Task<IActionResult> Library()
+    public async Task<IActionResult> Library(int cardId)
     {
-        var cards = await _repo.GetCardsForUser(userId:0);
-        //0 as a test ID, remember to remove this
-        return View(cards);
+        var card = await _repo.GetCard(cardId);
+        return View(card);
     }
         
     public async Task<IActionResult> ViewCard(int cardId)

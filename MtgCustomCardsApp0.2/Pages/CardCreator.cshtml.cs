@@ -22,7 +22,7 @@ namespace MtgCustomCardsApp0._2.Pages
         {
         }
         //In OnPost: CreateCardViewModel model
-        public void OnPost()
+        public async Task OnPost()
         {
             // Convert ViewModel to DomainModel
             var cardDomainModel = new Card
@@ -41,8 +41,8 @@ namespace MtgCustomCardsApp0._2.Pages
                 Illustrator = CreateCardRequest.Illustrator,
             };
 
-            dbContext.CardData.AddAsync(cardDomainModel);
-            dbContext.SaveChanges();
+            await dbContext.CardData.AddAsync(cardDomainModel);
+            await dbContext.SaveChangesAsync();
 
             ViewData["Message"] = "Card successfully created!";
         }

@@ -1,10 +1,13 @@
-﻿namespace MtgCustomCardsApp0._2.Models.ViewModels
+﻿using MtgCustomCardsApp0._2.Models.Images;
+using SQLitePCL;
+
+namespace MtgCustomCardsApp0._2.Models.ViewModels
 {
     public class CreateCardViewModel
     {
         public string Name { get; set; }
 
-        public string CardImg { get; set; }
+        public Image CardImg { get; set; }
 
         public string Type { get; set; }
 
