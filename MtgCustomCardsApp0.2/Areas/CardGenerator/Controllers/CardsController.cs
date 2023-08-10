@@ -25,6 +25,7 @@ public class CardsController : Controller
         return View(cards);
     }
 
+    [Authorize]
     public IActionResult CardCreator()
     {
         return View();
