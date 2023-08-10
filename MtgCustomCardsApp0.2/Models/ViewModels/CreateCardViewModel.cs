@@ -7,7 +7,7 @@ namespace MtgCustomCardsApp0._2.Models.ViewModels
     {
         public string Name { get; set; }
 
-        public Image CardImg { get; set; }
+        public ImageInputModel CardImg { get; set; }
 
         public string Type { get; set; }
 

@@ -13,6 +13,7 @@ namespace MtgCustomCardsApp0._2.Services
 			using var imageResult = await Image.LoadAsync(image.Content);
 
             await this.SaveImage(imageResult, $"Original_{image.FileName}", imageResult.Width);
+            await this.SaveImage(imageResult, $"CardSized_{image.FileName}", imageResult.Width);
             await this.SaveImage(imageResult, $"Thumbnail_{image.FileName}", ThumbnailWidth);
 
         }

@@ -12,4 +12,6 @@ public class ApplicationDbContext : IdentityDbContext
     }
 
     public DbSet<Card> CardData { get; set; }
+
+    public DbSet<ImageData> ImageData { get; set; }
 }
