@@ -11,7 +11,7 @@ public class Card
 
     public string Type { get; set; } = "Default T";
 
-    public string SubType { get; set; } = "Default Sub";
+    public string SubType { get; set; } = "";
 
     public uint CardId { get; set; } = 0;
 

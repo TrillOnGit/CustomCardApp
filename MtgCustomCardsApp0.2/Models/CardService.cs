@@ -32,15 +32,30 @@ public class CardService : ICardService
 
     public async Task<IEnumerable<Card>> GetCardsForUser(uint userId)
     {
-        return await _conn.QueryAsync<Card>(
-            "SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData");
+        return await _conn.QueryAsync<Card, ManaCost, Card>(
+            "SELECT CardID, CardName as Name, CardText, CardFlavorText, CardType as Type, CardSubType as SubType, " +
+            "CardPower as Power, CardToughness as Toughness, C as Colorless, W as White, U as Blue, B as Black, " +
+            "R as Red, G as Green FROM CardData",
+            (Card card, ManaCost manaCost) => { card.CardCost = manaCost;
+                return card;
+            }, splitOn: "Colorless");
     }
 
     public async Task<Card> GetCard(int id)
     {
-        return await _conn.QuerySingleAsync<Card>(
-            "SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData WHERE CardID = @id",
-            new { id });
+        var sql =
+            @"SELECT CardID, CardName as Name, CardText, CardFlavorText, CardType as Type, CardSubType as SubType, " +
+            "CardPower as Power, CardToughness as Toughness, C as Colorless, W as White, U as Blue, B as Black," +
+            " R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
+        return (await _conn.QueryAsync<Card, ManaCost, Card>(
+            sql,
+            (Card card, ManaCost manaCost) =>
+            {
+                card.CardCost = manaCost;
+                return card;
+            },
+            new { id },
+            splitOn: "Colorless")).First();
     }
 
     public async Task UpdateCard(Card card)
