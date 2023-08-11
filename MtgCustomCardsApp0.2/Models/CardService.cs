@@ -24,8 +24,8 @@ public class CardService : ICardService
             {
                 name = card.Name, text = card.CardText, flavor = card.CardFlavorText, illustrator = card.Illustrator,
                 rarity = card.Rarity, type = card.Type, subType = card.SubType, power = card.Power,
-                toughness = card.Toughness, isLegendary = card.IsLegendary, white = card.CardCost.White, 
-                blue = card.CardCost.Blue, black = card.CardCost.Black, red = card.CardCost.Red, 
+                toughness = card.Toughness, isLegendary = card.IsLegendary, white = card.CardCost.White,
+                blue = card.CardCost.Blue, black = card.CardCost.Black, red = card.CardCost.Red,
                 green = card.CardCost.Green, colorless = card.CardCost.Colorless
             });
     }
@@ -35,10 +35,12 @@ public class CardService : ICardService
         return await _conn.QueryAsync<Card>(
             "SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData");
     }
-    
+
     public async Task<Card> GetCard(int id)
     {
-        return await _conn.QuerySingleAsync<Card>("SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData WHERE CardID = @id", new { id });
+        return await _conn.QuerySingleAsync<Card>(
+            "SELECT CardID, CardName as Name, CardText, CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness FROM CardData WHERE CardID = @id",
+            new { id });
     }
 
     public async Task UpdateCard(Card card)
@@ -47,10 +49,12 @@ public class CardService : ICardService
             "UPDATE CardData SET CardName = @name, CardType = @type, CardSubType = @subtype, CardPower = @power, " +
             "CardToughness = @toughness, CardText = @text, CardFlavorText = @flavor, CardIllustrator = @illustrator, " +
             "W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
-            new {name = card.Name, type = @card.Type, subtype = @card.SubType, power = @card.Power, 
-                toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText, 
-                illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue, 
-                black = card.CardCost.Black, red = card.CardCost.Red, green = card.CardCost.Green, 
+            new
+            {
+                name = card.Name, type = @card.Type, subtype = @card.SubType, power = @card.Power,
+                toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText,
+                illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue,
+                black = card.CardCost.Black, red = card.CardCost.Red, green = card.CardCost.Green,
                 colorless = card.CardCost.Colorless, id = card.CardId
             });
     }

@@ -3,7 +3,7 @@ namespace MtgCustomCardsApp0._2.Models;
 
 public class Card
 {
-    public uint UserId { get; set; } = 0;
+    public Guid UserId { get; set; }
 
     public string Name { get; set; } = "Default Name";
 

@@ -2,10 +2,6 @@
 
 <h2>Library</h2>
 
-<div style="display: block">
-     <a href="/CardCreator/">Create a New Card!</a>
- </div>
-
 <table class="table">
     <tr>
         <th>ID</th>
@@ -15,6 +11,7 @@
         <th>Text</th>
         <th>Type</th>
         <th>SubType</th>
+        <th>Flavor</th>
     </tr>
 
     @foreach (var card in @Model)
@@ -27,7 +24,12 @@
             <td>@card.CardText</td>
             <td>@card.Type</td>
             <td>@card.SubType</td>
+            <td>@card.CardFlavorText</td>
         </tr>
     }
 
 </table>
+
+<div style="display: block">
+    <a href="/Cards/CardCreator/">Create a New Card!</a>
+</div>
