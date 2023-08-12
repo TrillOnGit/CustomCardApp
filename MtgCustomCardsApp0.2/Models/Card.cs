@@ -5,11 +5,11 @@ public class Card
 {
     public Guid UserId { get; set; }
 
-    public string Name { get; set; } = "Default Name";
+    public string Name { get; set; } = "";
 
     //public Uri CardImg { get; set; }
 
-    public string Type { get; set; } = "Default T";
+    public string Type { get; set; } = "";
 
     public string SubType { get; set; } = "";
 
@@ -25,7 +25,7 @@ public class Card
 
     public string Power { get; set; } = "";
 
-    public string Toughness { get; set; } = "";
+    public string Toughness { get; set; } = ""; 
 
     public bool IsLegendary { get; set; } = false;
     
