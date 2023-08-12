@@ -34,7 +34,7 @@ public class CardService : ICardService
     {
         return await _conn.QueryAsync<Card, ManaCost, Card>(
             "SELECT CardID, CardName as Name, CardText, CardFlavorText, CardType as Type, CardSubType as SubType, " +
-            "CardPower as Power, CardToughness as Toughness, C as Colorless, W as White, U as Blue, B as Black, " +
+            "CardPower as Power, CardToughness as Toughness, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black, " +
             "R as Red, G as Green FROM CardData",
             (Card card, ManaCost manaCost) => { card.CardCost = manaCost;
                 return card;
@@ -45,7 +45,7 @@ public class CardService : ICardService
     {
         var sql =
             @"SELECT CardID, CardName as Name, CardText, CardFlavorText, CardType as Type, CardSubType as SubType, " +
-            "CardPower as Power, CardToughness as Toughness, C as Colorless, W as White, U as Blue, B as Black," +
+            "CardPower as Power, CardToughness as Toughness, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black," +
             " R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
         return (await _conn.QueryAsync<Card, ManaCost, Card>(
             sql,
