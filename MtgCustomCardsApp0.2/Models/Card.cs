@@ -85,7 +85,7 @@ internal static class ColorHelpers
     public static AdjustingColor GetInnerColor(ManaCost inputCost)
     {
         var colorCount = 0;
-        var frameColor = AdjustingColor.Colorless;
+        var innerColor = AdjustingColor.Colorless;
         var manaCostArr = new[] { inputCost.White, inputCost.Blue, inputCost.Black, inputCost.Red, inputCost.Green };
 
         for (var i = 0; i < manaCostArr.Length; i++)
@@ -93,10 +93,10 @@ internal static class ColorHelpers
             if (manaCostArr[i] >= 1)
             {
                 colorCount++;
-                frameColor |= (AdjustingColor)(1<<i);
+                innerColor |= (AdjustingColor)(1<<i);
             }
         }
-        return colorCount >= 2 ? AdjustingColor.Gold : frameColor;
+        return colorCount >= 2 ? AdjustingColor.Gold : innerColor;
     }
 }
 
@@ -109,17 +109,3 @@ internal static class CardCostHelper
         return uint.Parse(storageString);
     }
 }
-
-
-// public static class Example
-// {
-//     public static void Test()
-//     {
-//         string userInput = "2WW";
-//         var card = new Card
-//         {
-//             CardCost = ManaCost.Parse(userInput)
-//         };
-//         Console.WriteLine(card.CardCost);
-//     }
-// }
