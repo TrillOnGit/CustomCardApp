@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="~/MtgCustomCardsApp0._2.styles.css" asp-append-version="true"/>
 </head>
 <body>
+
 <header class="sticky-top">
+    <a data-toggle="tooltip" title="Illustrated by: Chris Seaman">
+        <img src="~/assets/pageImages/Rocco-Cabaretti-Caterer-Streets-of-New-Capenna-MtG-Art.jpg" height="963" class="float-start" alt="Unable to find Image">
+    </a>
+    <a data-toggle="tooltip" title="Illustrated by: Tuan Duong Chu">
+        <img src="~/assets/pageImages/Ziatoras-Envoy-Streets-of-New-Capenna-MtG-Art.jpg" height="963" class="float-end" alt="Unable to find Image">
+    </a>
+
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <nav class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">MtgCustomCardsApp0._2</a>
@@ -37,6 +45,7 @@
         </nav>
     </nav>
 </header>
+
 <div class="container">
     <main role="main" class="pb-3">
         @RenderBody()
@@ -45,9 +54,10 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2023 - MtgCustomCardsApp0._2 - <a asp-area="" asp-page="/Privacy">
-            @* Privacy *@
-        </a>
+        &copy; 2023 - MtgCustomCardsApp0._2
+        @* <a asp-area="" asp-page="/Privacy"> *@
+        @*     $1$ Privacy #1# *@
+        @* </a> *@
     </div>
 </footer>
 
