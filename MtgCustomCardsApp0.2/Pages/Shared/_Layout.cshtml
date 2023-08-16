@@ -8,17 +8,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/MtgCustomCardsApp0._2.styles.css" asp-append-version="true"/>
 </head>
-<body>
-
+<body class="art-bg">
+<div class="container bg-white" style="min-height:100vh; position: absolute; top:0; left: 50%; transform: translateX(-50%); z-index:-1"></div>
 <header class="sticky-top">
-    <a data-toggle="tooltip" title="Illustrated by: Chris Seaman">
-        <img src="~/assets/pageImages/Rocco-Cabaretti-Caterer-Streets-of-New-Capenna-MtG-Art.jpg" height="963" class="float-start" alt="Unable to find Image">
-    </a>
-    <a data-toggle="tooltip" title="Illustrated by: Tuan Duong Chu">
-        <img src="~/assets/pageImages/Ziatoras-Envoy-Streets-of-New-Capenna-MtG-Art.jpg" height="963" class="float-end" alt="Unable to find Image">
-    </a>
-
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
         <nav class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">MtgCustomCardsApp0._2</a>
             @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" *@
@@ -46,20 +39,22 @@
     </nav>
 </header>
 
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
-
-<footer class="border-top footer text-muted">
+<div class="container bg-white">
     <div class="container">
-        &copy; 2023 - MtgCustomCardsApp0._2
-        @* <a asp-area="" asp-page="/Privacy"> *@
-        @*     $1$ Privacy #1# *@
-        @* </a> *@
+        <main role="main" class="py-3">
+            @RenderBody()
+        </main>
     </div>
-</footer>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - MtgCustomCardsApp0._2 - Website created by Austin Funk and Haroutun Panosyan - Illustrations by Chris Seaman and Tuan Duong Chu
+            @* <a asp-area="" asp-page="/Privacy"> *@
+            @*     $1$ Privacy #1# *@
+            @* </a> *@
+        </div>
+    </footer>
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
