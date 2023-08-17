@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MtgCustomCardsApp0._2.Data;
 using MtgCustomCardsApp0._2.Interfaces;
 using MtgCustomCardsApp0._2.Models;
 
@@ -30,9 +31,10 @@ public class CardsController : Controller
     {
         return View();
     }
-
+    [HttpPost]
     public async Task<IActionResult> InsertCardToDatabase(Card card)
     {
+
         await _repo.CreateCard(card);
         return RedirectToAction("Library");
     }
@@ -50,7 +52,7 @@ public class CardsController : Controller
     }
 
     public async Task<IActionResult> UpdateCardToDatabase(Card card)
-    {
+    {      
         await _repo.UpdateCard(card);
 
         return RedirectToAction("ViewCard", new { id = card.CardId });
@@ -61,5 +63,6 @@ public class CardsController : Controller
         await _repo.DeleteCard(card);
         return RedirectToAction("Library");
     }
+
 
 }

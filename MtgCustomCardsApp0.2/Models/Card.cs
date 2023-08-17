@@ -7,7 +7,7 @@ public class Card
 
     public string Name { get; set; } = "";
 
-    //public Uri CardImg { get; set; }
+    public byte[] CardImg { get; set; }
 
     public string Type { get; set; } = "";
 

@@ -19,7 +19,7 @@
     <div class="container d-flex align-items-center justify-content-center">
         <div class="card">
             <div class="card-body">
-                <form>
+                <form enctype="multipart/form-data">
 
                     <!-- 2 column grid layout with text inputs for card name and mana cost -->
                     <div class="mt-1 row">
@@ -37,7 +37,7 @@
                     <!--Card image field-->
                     <!--Full width grid layout for image-->
                     <div class="mt-2">
-                        <input type="file" id="imageInput">
+                            <input type="file" class="form-control" name="image" id="imageInput">
                         <div id="imagePreview" class="mt-2"></div>
                     </div>
 
@@ -81,14 +81,14 @@
                     <div class="mt-2 row">
                         <div class="col-sm">
                             <fieldset class="form-outline">
-                                <input id="card-power" class="form-control bg-dark" name="Power" type="text" maxlength="22"/>
+                                <input id="card-power" class="form-control bg-dark" name="Power" type="text" maxlength="2"/>
                                 <label for="card-power">Power</label>
                             </fieldset>
                         </div>
 
                         <div class="col-sm">
                             <fieldset class="form-outline">
-                                <input id="card-toughness" class="form-control bg-dark" name="Toughness" type="text" maxlength="22"/>
+                                <input id="card-toughness" class="form-control bg-dark" name="Toughness" type="text" maxlength="2"/>
                                 <label for="card-toughness">Toughness</label>
                             </fieldset>
                         </div>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="col-sm-9">
                             <fieldset class="form-outline">
-                                <input id="card-illus" class="form-control bg-dark" name="Illustrator" type="text" maxlength="22"/>
+                                <input id="card-illus" class="form-control bg-dark" name="Illustrator" type="text" maxlength="31"/>
                                 <label for="card-illus">Illustrator</label>
                             </fieldset>
                         </div>

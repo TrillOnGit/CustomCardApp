@@ -16,13 +16,13 @@ public class CardService : ICardService
     public async Task CreateCard(Card card)
     {
         await _conn.ExecuteAsync(
-            "INSERT INTO CardData (CardName, CARDTEXT, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
+            "INSERT INTO CardData (CardName, CARDTEXT, CardImg = @cardImg, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
             "cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @text, @flavor, " +
-            "@illustrator, @rarity, @type, @subType, @power, @toughness, @isLegendary, @white, @blue, @black, " +
+            "@illustrator, @rarity, @type, @subType, @cardImg, @power, @toughness, @isLegendary, @white, @blue, @black, " +
             "@red, @green, @colorless);",
             new
             {
-                name = card.Name, text = card.CardText, flavor = card.CardFlavorText, illustrator = card.Illustrator,
+                name = card.Name, cardImg = card.CardImg, text = card.CardText, flavor = card.CardFlavorText, illustrator = card.Illustrator,
                 rarity = card.Rarity, type = card.Type, subType = card.SubType, power = card.Power,
                 toughness = card.Toughness, isLegendary = card.IsLegendary, white = card.CardCost.White,
                 blue = card.CardCost.Blue, black = card.CardCost.Black, red = card.CardCost.Red,
@@ -61,12 +61,12 @@ public class CardService : ICardService
     public async Task UpdateCard(Card card)
     {
         await _conn.ExecuteAsync(
-            "UPDATE CardData SET CardName = @name, CardType = @type, CardSubType = @subtype, CardPower = @power, " +
+            "UPDATE CardData SET CardName = @name, CardImg = @cardImg, CardType = @type, CardSubType = @subtype, CardPower = @power, " +
             "CardToughness = @toughness, CardText = @text, CardFlavorText = @flavor, CardIllustrator = @illustrator, " +
             "W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
             new
             {
-                name = card.Name, type = @card.Type, subtype = @card.SubType, power = @card.Power,
+                name = card.Name, cardImg = card.CardImg, type = @card.Type, subtype = @card.SubType, power = @card.Power,
                 toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText,
                 illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue,
                 black = card.CardCost.Black, red = card.CardCost.Red, green = card.CardCost.Green,
