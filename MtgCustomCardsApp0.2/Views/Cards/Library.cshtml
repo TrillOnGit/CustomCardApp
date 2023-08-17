@@ -4,7 +4,7 @@
 
 <table class="table">
     <tr>
-        <th>ID</th>
+        @* <th>ID</th> *@
         <th>Name</th>
         <th>Power</th>
         <th>Toughness</th>
@@ -17,8 +17,9 @@
     @foreach (var card in @Model)
     {
         <tr>
-            <td><a href=/Cards/ViewCard/@card.CardId>@card.CardId</a></td>
-            <td>@card.Name</td>
+            @* IDs have been commented out, only to be used for testing *@
+            @* <td>@card.CardId</td> *@
+            <td><a href=/Cards/ViewCard/@card.CardId>@card.Name</a></td>
             <td>@card.Power</td>
             <td>@card.Toughness</td>
             <td style="word-break: break-word" width="25%">@card.CardText</td>
@@ -32,4 +33,5 @@
 
 <div style="display: block">
     <a href="/Cards/CardCreator/">Create a New Card!</a>
+    <p></p>
 </div>

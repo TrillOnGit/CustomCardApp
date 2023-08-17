@@ -16,6 +16,12 @@
     background-attachment: fixed;
 }
 
+#footer {
+    position: fixed;
+    bottom: 0;
+    background: white;
+}
+
 #card-name, #mana-cost, #card-type, #card-sub-type, #card-text, #card-flavor-text,
 #card-power, #card-toughness, #card-illus, #create-btn {
     color: white;
