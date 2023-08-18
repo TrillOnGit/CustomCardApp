@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MtgCustomCardsApp0._2.Data;
 using MtgCustomCardsApp0._2.Interfaces;
 using MtgCustomCardsApp0._2.Models;
 
@@ -30,12 +31,18 @@ public class CardsController : Controller
     {
         return View();
     }
-
-    public async Task<IActionResult> InsertCardToDatabase(Card card)
+    [HttpPost]
+    public async Task<IActionResult> InsertCardToDatabase(Card card, IFormFile img)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException();
         card.UserId = userId;
+        if (img != null && img.Length > 0)
+        {
+            card.CardImg = new byte[img.Length];
+            img.OpenReadStream().Read(card.CardImg, 0, (int)img.Length);
+        }
         await _repo.CreateCard(card);
+
         return RedirectToAction("Library");
     }
     
@@ -52,7 +59,7 @@ public class CardsController : Controller
     }
 
     public async Task<IActionResult> UpdateCardToDatabase(Card card)
-    {
+    {      
         await _repo.UpdateCard(card);
 
         return RedirectToAction("ViewCard", new { id = card.CardId });
@@ -63,5 +70,6 @@ public class CardsController : Controller
         await _repo.DeleteCard(card);
         return RedirectToAction("Library");
     }
+
 
 }

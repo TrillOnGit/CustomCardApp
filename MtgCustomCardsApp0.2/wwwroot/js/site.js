@@ -39,6 +39,14 @@
 
                     imagePreview.innerHTML = "";
                     imagePreview.appendChild(resizedImage);
+
+                    // Convert resized image to byte array and insert into database
+                    const binaryImage = atob(resizedImage.src.split(',')[1]);
+                    const byteArray = new Uint8Array(binaryImage.length);
+                    for (let i = 0; i < binaryImage.length; i++) {
+                        byteArray[i] = binaryImage.charCodeAt(i);
+                    }
+                    insertImageIntoDatabase(byteArray);
                 };
 
                 image.src = e.target.result;

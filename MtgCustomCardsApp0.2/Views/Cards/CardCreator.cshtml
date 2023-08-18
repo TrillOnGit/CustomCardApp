@@ -1,7 +1,7 @@
 ﻿@model MtgCustomCardsApp0._2.Models.Card
 
 
-@using (Html.BeginForm("InsertCardToDatabase", "Cards", "Post"))
+@using (Html.BeginForm("InsertCardToDatabase", "Cards", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @* <!doctype html> *@
     <html lang="en">
@@ -19,7 +19,7 @@
     <div class="container d-flex align-items-center justify-content-center">
         <div class="card">
             <div class="card-body">
-                <form>
+                @*<form enctype="multipart/form-data" id="uploadForm">*@
 
                     <!-- 2 column grid layout with text inputs for card name and mana cost -->
                     <div class="mt-1 row">
@@ -36,8 +36,8 @@
 
                     <!--Card image field-->
                     <!--Full width grid layout for image-->
-                    <div class="mt-2">
-                        <input type="file" id="imageInput">
+                    <div class="mt-2" asp-for="img">
+                        <input type="file" class="form-control" id="imageInput" accept="image/*" name="img" onclick="uploadImage()" asp-for="CardImg">
                         <div id="imagePreview" class="mt-2"></div>
                     </div>
 
@@ -81,14 +81,14 @@
                     <div class="mt-2 row">
                         <div class="col-sm">
                             <fieldset class="form-outline">
-                                <input id="card-power" class="form-control bg-dark" name="Power" type="text" maxlength="22"/>
+                                <input id="card-power" class="form-control bg-dark" name="Power" type="text" maxlength="2"/>
                                 <label for="card-power">Power</label>
                             </fieldset>
                         </div>
 
                         <div class="col-sm">
                             <fieldset class="form-outline">
-                                <input id="card-toughness" class="form-control bg-dark" name="Toughness" type="text" maxlength="22"/>
+                                <input id="card-toughness" class="form-control bg-dark" name="Toughness" type="text" maxlength="2"/>
                                 <label for="card-toughness">Toughness</label>
                             </fieldset>
                         </div>
@@ -105,15 +105,15 @@
                         </div>
                         <div class="col-sm-9">
                             <fieldset class="form-outline">
-                                <input id="card-illus" class="form-control bg-dark" name="Illustrator" type="text" maxlength="22"/>
+                                <input id="card-illus" class="form-control bg-dark" name="Illustrator" type="text" maxlength="31"/>
                                 <label for="card-illus">Illustrator</label>
                             </fieldset>
                         </div>
                     </div>
 
-                    <button class="btn card-footer container-fluid mt-3 col-sm-5 bg-dark" id="create-btn" type="submit" value="Submit">Create Card</button>
+                    <button class="btn card-footer container-fluid mt-3 col-sm-5 bg-dark" id="create-btn" type="submit" value="Submit" onclick="uploadImage()">Create Card</button>
 
-                </form>
+                @*</form>*@
             </div>
         </div>
     </div>
