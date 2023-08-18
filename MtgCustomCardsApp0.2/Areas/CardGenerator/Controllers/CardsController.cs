@@ -36,7 +36,7 @@ public class CardsController : Controller
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException();
         card.UserId = userId;
-        if (img != null && img.Length > 0)
+        if (img is { Length: > 0 })
         {
             card.CardImg = new byte[img.Length];
             await img.OpenReadStream().ReadAsync(card.CardImg, 0, (int)img.Length);
