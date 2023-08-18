@@ -39,7 +39,7 @@ public class CardsController : Controller
         if (img != null && img.Length > 0)
         {
             card.CardImg = new byte[img.Length];
-            img.OpenReadStream().Read(card.CardImg, 0, (int)img.Length);
+            await img.OpenReadStream().ReadAsync(card.CardImg, 0, (int)img.Length);
         }
         await _repo.CreateCard(card);
 
@@ -58,8 +58,13 @@ public class CardsController : Controller
         return View(card);
     }
 
-    public async Task<IActionResult> UpdateCardToDatabase(Card card)
-    {      
+    public async Task<IActionResult> UpdateCardToDatabase(Card card, IFormFile img)
+    {
+        if (img is { Length: > 0 })
+        {
+            card.CardImg = new byte[img.Length];
+            await img.OpenReadStream().ReadAsync(card.CardImg, 0, (int)img.Length);
+        }
         await _repo.UpdateCard(card);
 
         return RedirectToAction("ViewCard", new { id = card.CardId });

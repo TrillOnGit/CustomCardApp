@@ -1,6 +1,6 @@
 @model MtgCustomCardsApp0._2.Models.Card
 
-@using (Html.BeginForm("UpdateCardToDatabase", "Cards", "Post"))
+@using (Html.BeginForm("UpdateCardToDatabase", "Cards", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <h2 class="text-center display-5">Update @Model.Name</h2>
   
@@ -29,8 +29,8 @@
 
                     <!--Card image field-->
                     <!--Full width grid layout for image-->
-                    <div class="mt-2">
-                        <input type="file" id="imageInput">
+                    <div class="mt-2" asp-for="img">
+                        <input type="file" class="form-control" id="imageInput" accept="image/*" name="img" onclick="uploadImage()" asp-for="CardImg">
                         <div id="imagePreview" class="mt-2"></div>
                     </div>
 
