@@ -23,7 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\CardGenerator\Views\" />
       <Folder Include="wwwroot\assets\icons\" />
       <Folder Include="wwwroot\assets\pageImages\" />
     </ItemGroup>

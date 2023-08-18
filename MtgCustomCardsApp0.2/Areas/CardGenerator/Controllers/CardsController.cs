@@ -33,6 +33,8 @@ public class CardsController : Controller
 
     public async Task<IActionResult> InsertCardToDatabase(Card card)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException();
+        card.UserId = userId;
         await _repo.CreateCard(card);
         return RedirectToAction("Library");
     }

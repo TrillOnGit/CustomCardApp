@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model IEnumerable<MtgCustomCardsApp0._2.Models.Card>
 
 <h2>Library</h2>
@@ -16,17 +17,20 @@
 
     @foreach (var card in @Model)
     {
-        <tr>
-            @* IDs have been commented out, only to be used for testing *@
-            @* <td>@card.CardId</td> *@
-            <td><a href=/Cards/ViewCard/@card.CardId>@card.Name</a></td>
-            <td>@card.Power</td>
-            <td>@card.Toughness</td>
-            <td style="word-break: break-word" width="25%">@card.CardText</td>
-            <td>@card.Type</td>
-            <td>@card.SubType</td>
-            <td style="word-break: break-word" width="15%" class="fst-italic">@card.CardFlavorText</td>
-        </tr>
+        if (User.FindFirstValue(ClaimTypes.NameIdentifier) == card.UserId)
+        {
+            <tr>
+                @* IDs have been commented out, only to be used for testing *@
+                @* <td>@card.CardId</td> *@
+                <td><a href=/Cards/ViewCard/@card.CardId>@card.Name</a></td>
+                <td>@card.Power</td>
+                <td>@card.Toughness</td>
+                <td style="word-break: break-word" width="25%">@card.CardText</td>
+                <td>@card.Type</td>
+                <td>@card.SubType</td>
+                <td style="word-break: break-word" width="15%" class="fst-italic">@card.CardFlavorText</td>
+            </tr>
+        }
     }
 
 </table>
