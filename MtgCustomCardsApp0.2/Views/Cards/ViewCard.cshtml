@@ -43,7 +43,7 @@
                 <div class="mt-2">
                     <table class="table">
                         <tr>
-                            <td>@Model.CardImg</td>
+                            <td><img src="data:image/png;base64,@Convert.ToBase64String(Model.CardImg)" alt="Image"/></td>
                         </tr>
                     </table>
                 </div>

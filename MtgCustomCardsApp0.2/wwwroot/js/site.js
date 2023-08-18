@@ -4,19 +4,6 @@
     const maxWidth = 690;
     const maxHeight = 540;
 
-    // Function to insert image byte array into SQLite database
-    function insertImageIntoDatabase(imageByteArray) {
-        const query = "INSERT INTO CardImg VALUES @cardImg";
-
-        db.run(query, [imageByteArray], function (err) {
-            if (err) {
-                console.error('Error inserting image:', err.message);
-            } else {
-                console.log('Image inserted successfully');
-            }
-        });
-    }
-
     imageInput.addEventListener("change", function (e) {
         const file = e.target.files[0];
         if (file) {

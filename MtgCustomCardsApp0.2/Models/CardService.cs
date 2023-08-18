@@ -1,6 +1,7 @@
 using System.Data;
 using MtgCustomCardsApp0._2.Interfaces;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MtgCustomCardsApp0._2.Models;
 
@@ -12,17 +13,18 @@ public class CardService : ICardService
     {
         _conn = conn;
     }
-
-    public async Task CreateCard(Card card)
+  
+        public async Task CreateCard(Card card)
     {
+
         await _conn.ExecuteAsync(
-            "INSERT INTO CardData (CardName, CARDTEXT, CardImg = @cardImg, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
-            "cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @text, @flavor, " +
-            "@illustrator, @rarity, @type, @subType, @cardImg, @power, @toughness, @isLegendary, @white, @blue, @black, " +
+            "INSERT INTO CardData (CardName, CARDTEXT, CardImg, CardFlavorText, CardIllustrator, cardRARITY, cardTYPE, " +
+            "cardSUBTYPE, cardPOWER, cardTOUGHNESS, ISLEGENDARY, W, U, B, R, G, C) VALUES (@name, @text, @cardImg, @flavor, " +
+            "@illustrator, @rarity, @type, @subType, @power, @toughness, @isLegendary, @white, @blue, @black, " +
             "@red, @green, @colorless);",
             new
             {
-                name = card.Name, cardImg = card.CardImg, text = card.CardText, flavor = card.CardFlavorText, illustrator = card.Illustrator,
+                name = card.Name, text = card.CardText, cardImg = card.CardImg, flavor = card.CardFlavorText, illustrator = card.Illustrator,
                 rarity = card.Rarity, type = card.Type, subType = card.SubType, power = card.Power,
                 toughness = card.Toughness, isLegendary = card.IsLegendary, white = card.CardCost.White,
                 blue = card.CardCost.Blue, black = card.CardCost.Black, red = card.CardCost.Red,
@@ -33,7 +35,7 @@ public class CardService : ICardService
     public async Task<IEnumerable<Card>> GetCardsForUser(uint userId)
     {
         return await _conn.QueryAsync<Card, ManaCost, Card>(
-            "SELECT CardID, CardName as Name, CardText, CardFlavorText, CardType as Type, CardSubType as SubType, " +
+            "SELECT CardID, CardName as Name,  CardText, CardImg, CardFlavorText, CardType as Type, CardSubType as SubType, " +
             "CardPower as Power, CardToughness as Toughness, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black, " +
             "R as Red, G as Green FROM CardData",
             (Card card, ManaCost manaCost) => { card.CardCost = manaCost;
@@ -44,7 +46,7 @@ public class CardService : ICardService
     public async Task<Card> GetCard(int id)
     {
         var sql =
-            @"SELECT CardID, CardName as Name, CardText, CardFlavorText, CardType as Type, CardSubType as SubType, " +
+            @"SELECT CardID, CardName as Name, CardText, CardImg, CardFlavorText, CardType as Type, CardSubType as SubType, " +
             "CardPower as Power, CardToughness as Toughness, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black," +
             " R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
         return (await _conn.QueryAsync<Card, ManaCost, Card>(

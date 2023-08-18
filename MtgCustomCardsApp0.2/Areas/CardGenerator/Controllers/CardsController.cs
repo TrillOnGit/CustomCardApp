@@ -32,10 +32,14 @@ public class CardsController : Controller
         return View();
     }
     [HttpPost]
-    public async Task<IActionResult> InsertCardToDatabase(Card card)
+    public async Task<IActionResult> InsertCardToDatabase(Card card, IFormFile img)
     {
-
-        await _repo.CreateCard(card);
+        if (img != null && img.Length > 0)
+        {
+            card.CardImg = new byte[img.Length];
+            img.OpenReadStream().Read(card.CardImg, 0, (int)img.Length);
+        }
+            await _repo.CreateCard(card);
         return RedirectToAction("Library");
     }
     
