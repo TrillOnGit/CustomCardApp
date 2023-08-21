@@ -31,6 +31,7 @@ public class CardsController : Controller
     {
         return View();
     }
+    
     [HttpPost]
     public async Task<IActionResult> InsertCardToDatabase(Card card, IFormFile img)
     {
@@ -51,7 +52,7 @@ public class CardsController : Controller
         var card = await _repo.GetCard(id);
         return View(card);
     }
-        
+    
     public async Task<IActionResult> UpdateCard(int id)
     {
         var card = await _repo.GetCard(id);
@@ -75,6 +76,4 @@ public class CardsController : Controller
         await _repo.DeleteCard(card);
         return RedirectToAction("Library");
     }
-
-
 }

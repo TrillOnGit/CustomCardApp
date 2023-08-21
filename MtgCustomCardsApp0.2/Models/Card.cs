@@ -1,6 +1,5 @@
 namespace MtgCustomCardsApp0._2.Models;
 
-
 public class Card
 {
     public string? UserId { get; set; }
@@ -102,7 +101,6 @@ internal static class ColorHelpers
 
 internal static class CardCostHelper
 {
-    //TODO: Either give the user a warning when inputting values like "3W4R" instead of "7WR" or account for it and add.
     public static uint GetColorlessMana(string cardManaCost)
     {
         var storageString = cardManaCost.Where(char.IsDigit).Aggregate("0", (current, t) => current + t);
