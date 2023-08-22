@@ -65,23 +65,23 @@
             <!--Full width grid layout for image-->
             <div class="col-sm-8 mt-2">
 
-                <img src="data:image/png;base64,@Convert.ToBase64String(Model.CardImg ?? Array.Empty<byte>())" alt="Image"/>
+                <img src="data:image/png;base64,@Convert.ToBase64String(Model.CardImg ?? Array.Empty<byte>())" alt="Image" style="max-width: 690px; max-height: 540px; "/>
 
             </div>
 
             <!-- 2 column grid layout with text inputs for card type and card sub type -->
             <div class="mt-2 row">
                 <div class="col-sm-3 mt-2 text-center">
-                    
-                            @if (Model.IsLegendary)
-                                 {
-                                     <div>Legendary</div>
-                                 }
-                            else
-                            {
-                                <div></div>
-                            }
-                        
+
+                    @if (Model.IsLegendary)
+                    {
+                        <div>Legendary</div>
+                    }
+                    else
+                    {
+                        <div></div>
+                    }
+
                 </div>
                 <div class="col-sm-5">
                     <table class="table">
