@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-body">
 
-                <form>
+                <div>
 
                     <!-- 2 column grid layout with text inputs for card name and mana cost -->
                     <div class="mt-1 row">
@@ -30,7 +30,7 @@
                     <!--Card image field-->
                     <!--Full width grid layout for image-->
                     <div class="mt-2" asp-for="img">
-                        <input type="file" class="form-control" id="imageInput" accept="image/*" name="img" onclick="uploadImage()" asp-for="CardImg" value="">
+                        <input type="file" class="form-control" id="imageInput" accept="image/*" name="img" onclick="uploadImage()" asp-for="CardImg">
                         <div id="imagePreview" class="mt-2"></div>
                     </div>
 
@@ -106,7 +106,7 @@
 
                     <input asp-for="CardId" type="hidden" value="@Model.CardId" name="CardId"/>
                     <button class="btn card-footer container-fluid mt-3 col-sm-5 bg-dark" id="create-btn" type="submit" value="Update Card">Update Card</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>

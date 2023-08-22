@@ -49,7 +49,7 @@ public class CardService : ICardService
 
     public async Task<Card> GetCard(int id)
     {
-        const string sql = @"SELECT CardID, UserID, CardName as Name, CardText, CardImg, CardFlavorText, " +
+        const string sql = @"SELECT CardID, UserID, CardName as Name, CardText, CardImg, CardFlavorText, IsLegendary," +
                             "CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness," + 
                             "CardRarity as Rarity, CardImg, CardIllustrator as Illustrator, C as Colorless, W as White," + 
                             "U as Blue, B as Black, R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
@@ -68,12 +68,12 @@ public class CardService : ICardService
     {
         await _conn.ExecuteAsync(
             "UPDATE CardData SET CardName = @name, CardImg = @cardImg, CardType = @type, CardSubType = @subtype, CardPower = @power, " +
-            "CardToughness = @toughness, CardText = @text, CardFlavorText = @flavor, CardIllustrator = @illustrator, " +
-            "W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
+            "CardToughness = @toughness, IsLegendary = @isLegendary, CardText = @text, CardFlavorText = @flavor, CardIllustrator = @illustrator, " +
+            "CardRarity = @rarity, W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
             new
             {
                 name = card.Name, cardImg = card.CardImg, type = @card.Type, subtype = @card.SubType,
-                power = @card.Power,
+                power = @card.Power, isLegendary = card.IsLegendary, rarity = card.Rarity,
                 toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText,
                 illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue,
                 black = card.CardCost.Black, red = card.CardCost.Red, green = card.CardCost.Green,
