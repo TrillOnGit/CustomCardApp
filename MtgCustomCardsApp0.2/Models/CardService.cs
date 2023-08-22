@@ -39,19 +39,20 @@ public class CardService : ICardService
             "SELECT CardID, UserID, CardName as Name, CardText, CardImg, CardFlavorText, CardType as Type, CardSubType as SubType, " +
             "CardPower as Power, CardToughness as Toughness, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black, " +
             "R as Red, G as Green FROM CardData",
-        (Card card, ManaCost manaCost) =>
-        {
-            card.CardCost = manaCost;
-            return card;
-        }, splitOn:
-        "Colorless");
+            (Card card, ManaCost manaCost) =>
+            {
+                card.CardCost = manaCost;
+                return card;
+            }, splitOn:
+            "Colorless");
     }
 
     public async Task<Card> GetCard(int id)
     {
-        const string sql = @"SELECT CardID, UserID, CardName as Name, CardText, CardImg, CardFlavorText, CardType as Type, CardSubType as SubType, " +
-                           "CardPower as Power, CardToughness as Toughness, CardRarity as Rarity, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black," +
-                           " R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
+        const string sql = @"SELECT CardID, UserID, CardName as Name, CardText, CardImg, CardFlavorText, " +
+                            "CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness," + 
+                            "CardRarity as Rarity, CardImg, CardIllustrator as Illustrator, C as Colorless, W as White," + 
+                            "U as Blue, B as Black, R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
         return (await _conn.QueryAsync<Card, ManaCost, Card>(
             sql,
             (Card card, ManaCost manaCost) =>
