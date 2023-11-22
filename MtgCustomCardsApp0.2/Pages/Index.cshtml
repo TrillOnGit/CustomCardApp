@@ -13,18 +13,28 @@
 </head>
 
 <body>
+    <div class="container" id="box-items">
 
-<h1>Magic The Gathering Card Creator</h1>
-<p>If you're looking to create your own MTG custom card, look no further!</p>
+            <div class="col-lg-6" id="box-items">        
+            <h1>Magic The Gathering Card Creator</h1>
+            <p>If you're looking to create your own MTG custom card, look no further!</p>
 
-<p>Note that colorless mana must come first as a number, followed by any other mana type (repeat letters if multiple). </p>
-<p>Follow the example below to adhere to our requirements, otherwise some pieces will be missing:</p>
-<ul>
-    <li>3URB - This equates to: 3 Colorless, Blue, Red and Black.</li>
-    <li>5WWGGG - This equates to: 5 Colorless, 2 White and 3 Green.</li>
-    <li>For no colorless mana, put 0 or keep it blank: Eg. 0WB or URB.</li>
-</ul>
+            <p>Note that colorless mana must come first as a number, followed by any other mana type (repeat letters if multiple). </p>
+            <p>Follow the example below to adhere to our requirements, otherwise some pieces will be missing:</p>
+            <p>Have fun!</p>
+            </div>
 
+        <div class="col-lg-5" id="box-items">
+            <div class="p-4 border border-5 mt-3">3URB - This equates to: 3 Colorless, Blue, Red and Black.</div>
+            <div class="p-4 border border-5 mt-3">UUWB - This equates to: Two Blue, White and Black.</div>
+            <div class="p-4 border border-5 mt-3">Leave empty if you desire a no mana cost card.</div>
+        </div>
+
+        <div class="col-lg-3 row-cols-sm-auto mt-4 front-card" id="box-items">
+            <h4>Card Example:</h4>
+            <img class="container mb-5 mt-2 example-card" src="/assets/pageImages/ExampleCard.png" alt="Magic The Gathering Card Example" />
+        </div>
+    </div>
 </body>
 
 </html>

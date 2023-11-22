@@ -1,28 +1,175 @@
 .card {
     margin-top: 5%;
 }
-
 .card-body {
-    border: 20px solid black;
-    border-radius: 15px;
-    background-image: linear-gradient(180deg, rgb(175, 165, 136), rgb(94, 82, 68));
+    background: linear-gradient(180deg, rgba(214,189,131,1) 45%, rgba(79,73,37,1) 100%);
+    font-family: Beleren2016;
+}
+
+.display-5 {
+    color: white;
+    font-family: Beleren2016;
 }
 
 .art-bg {
-    background-image: url(/assets/pageImages/Rocco-Cabaretti-Caterer-Streets-of-New-Capenna-MtG-Art.jpg), url(/assets/pageImages/Ziatoras-Envoy-Streets-of-New-Capenna-MtG-Art.jpg);
-    background-position: left top, right top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-attachment: fixed;
+background-image: url(/assets/pageImages/Rocco-Cabaretti-Caterer-Streets-of-New-Capenna-MtG-Art.png), 
+    url(/assets/pageImages/Ziatoras-Envoy-Streets-of-New-Capenna-MtG-Art.png), 
+    url(/assets/pageImages/TheWarofEdaiga.png);
+background-position: left top, right top, center;
+background-repeat: no-repeat;
+background-size: contain;
+background-attachment: fixed;
+background-color: black;
+}
+
+body {
+    font-family: Beleren2016;
+}
+.text-change {
+    font-size: 55px;
+}
+
+.card-body-text-color {
+    color: black;
+}
+
+
+.name-text {
+    font-size: 45px;
+    display: inline-block;
+    padding-top: 45px;
+}
+
+@media only screen and (max-width: 991px) and (min-width: 769px) {
+    .name-text, .mana-text {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 768px) {
+    .name-text, .mana-text {
+        font-size: 25px;
+    }
+}
+
+.name-text, .type-text {
+    padding-left: 75px;
+}
+.mana-text {
+    position: absolute;
+    font-size: 45px;
+    padding-left: 350px;
+    margin-left: 78px;
+    margin-top: -67px;
+}
+
+.sub-type-text {
+    padding-left: 200px;
+}
+
+.type-text, .sub-type-text {
+    display: inline-block;
+    padding-top: 485px;
+    font-size: 35px;
+}
+
+.card-normal-text, .flavor-text {
+    font-size: 20px;
+    padding-top: 25px;
+    padding-left: 85px;
+    max-width: 680px;
+}
+.card-normal-text {
+    position: absolute;
+}
+
+.rar-ill-text {
+    display: inline-block;
+    color: grey;
+    font-size: 16px;
+    position: absolute;
+    padding-top: 875px;
+    margin-left: -505px;
+}
+
+.flavor-text {
+    font-style: italic;
+    padding-top: 215px;
+    position: absolute;
+}
+
+.pow-text, .tough-text, .slash-text {
+    display: inline-block;
+    font-size: 30px;
+}
+
+.dmg-text {
+    position: absolute;
+    padding-left: 605px;
+    padding-top: 305px;
+    margin-bottom: 70px;
+}
+
+.card-look {
+    background-image: url(/assets/cardImages/baseCard/Blue.png);
+    margin: auto;
+}
+
+@media only screen and (max-width: 991px) and (min-width: 769px) {
+    .card-look {
+        background-image: url(/assets/cardImages/baseCard/Colorless-md.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-look {
+        background-image: url(/assets/cardImages/baseCard/Colorless-sm.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+
+.card-size {
+    max-width: 750px;
+    height: 1050px;
+}
+
+.image-placement {
+    max-width: 690px;
+    max-height: 540px;
+    margin-left: 55px;
+    margin-top: 5px;
+    display: block;
+    position: absolute;
+    clip: rect(0px,635px,465px,0px);
+}
+
+
+.front-card {
+    text-align: center;
+    align-self: center;
+}
+.example-card {
+    width: 325px;
+    height: 450px;
+}
+
+#box-items {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #footer {
     position: fixed;
     bottom: 0;
-    background: white;
+    background: transparent;
 }
 
 #card-name, #mana-cost, #card-type, #card-sub-type, #card-text, #card-flavor-text,
 #card-power, #card-toughness, #card-illus, #create-btn {
     color: white;
 }
+

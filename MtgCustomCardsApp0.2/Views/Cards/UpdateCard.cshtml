@@ -16,13 +16,13 @@
                     <div class="mt-1 row">
                         <div class="col-sm-9">
                             <fieldset class="form-outline">
-                                <input id="card-name" class="form-control bg-dark" name="Name" type="text" maxlength="22" required value="@Model.Name"/>
+                                <input id="card-name" class="form-control bg-dark" name="Name" type="text" maxlength="15" required value="@Model.Name"/>
                                 <label class="form-label" for="card-name">Card Name</label>
                             </fieldset>
                         </div>
 
                         <div class="col-sm-3">
-                            <input id="mana-cost" class="form-control bg-dark" name="CardManaCostString" type="text" maxlength="22" value="@Model.CardCost.ToString()"/>
+                            <input id="mana-cost" class="form-control bg-dark" name="CardManaCostString" type="text" maxlength="8" value="@Model.CardCost.ToString()"/>
                             <label for="mana-cost">Mana Cost</label>
                         </div>
                     </div>
