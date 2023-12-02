@@ -19,7 +19,6 @@ public class CardColorTests
         var actual = testCard.CardCost.White + testCard.CardCost.Blue + testCard.CardCost.Black + 
                      testCard.CardCost.Red + testCard.CardCost.Green + testCard.CardCost.Colorless;
         
-        
         Assert.Equal(expected, actual);
     }
 
@@ -82,6 +81,7 @@ public class CardColorTests
         Assert.Equal(expected, actual);
 
     }
+    
     public class CardCountTests
     {
         [Theory]

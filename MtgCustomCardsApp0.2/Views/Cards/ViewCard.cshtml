@@ -8,99 +8,95 @@
 
     <div class="card-look card-size card-look-sm card-size-sm">
 
-            <div class="colonize-text">
+        <div class="colonize-text">
 
-                <div class="a-text name-text name-text-sm">
-                    @Model.Name
-                </div>
-
-                <div class="a-text mana-text mana-text-sm">
-                    @Model.CardManaCostString
-                </div>
-
-            </div>
-            <!--Card image field-->
-            <!--Full width grid layout for image-->
-            <div class="image-placement">
-
-                <img src="data:image/png;base64,@Convert.ToBase64String(Model.CardImg ?? Array.Empty<byte>())" alt="Image" style="max-width: 690px; max-height: 540px; "/>
-
+            <div class="a-text name-text name-text-sm">
+                @Model.Name
             </div>
 
-            <!-- 2 column grid layout with text inputs for card type and card sub type -->
-            <div class="a-text legendary-text">                
-                @if (Model.IsLegendary)
-                {
-                    <div>Legendary</div>
-                }
-                else
-                {
-                    <div></div>
-                }
+            <div class="a-text mana-text mana-text-sm">
+                @Model.CardManaCostString
             </div>
 
-            <div class="a-text type-text">
-                @Model.Type
-            </div>
+        </div>
+        <!--Card image field-->
+        <!--Full width grid layout for image-->
+        <div class="image-placement">
 
-            <div class="a-text sub-type-text">
-                @Model.SubType
-            </div>
+            <img src="data:image/png;base64,@Convert.ToBase64String(Model.CardImg ?? Array.Empty<byte>())" alt="Image" style="max-width: 690px; max-height: 540px; "/>
 
-            <div class="a-text card-normal-text">
-                @Model.CardText
-            </div>
-
-            <div class="a-text flavor-text">
-                @Model.CardFlavorText
-            </div>
-
-            <div class="dmg-text">
-                <div class="a-text pow-text">
-                    @Model.Power
-                </div>
-
-                <div class="a-text slash-text">/</div>
-
-                <div class="a-text tough-text">
-                    @Model.Toughness
-                </div>
-            </div>
-
-            <div class="rar-ill-text">
-                <div class="a-text rare-text">
-                    @Model.Rarity
-                </div>
-
-                <div class="a-text illus-text">
-                    @Model.Illustrator
-                </div>
-             </div>
         </div>
 
-        <div style="display: flex" class="mt-5 row justify-content-center mb-5">
+        <!-- 2 column grid layout with text inputs for card type and card sub type -->
+        
+        <div class="a-text type-text">
+            @if (Model.IsLegendary)
+            {
+                <div>Legendary @Model.Type</div>
+            }
+            else
+            {
+                <div>@Model.Type</div>
+            }
+        </div>
 
-            <div class="col-sm-2">
-                <form action="/Cards/UpdateCard/@Model.CardId">
-                    <input type="submit" value="Update">
+        <div class="a-text sub-type-text">
+            @Model.SubType
+        </div>
+
+        <div class="a-text card-normal-text">
+            @Model.CardText
+        </div>
+
+        <div class="a-text flavor-text">
+            @Model.CardFlavorText
+        </div>
+
+        <div class="dmg-text">
+            <div class="a-text pow-text">
+                @Model.Power
+            </div>
+
+            <div class="a-text slash-text">/</div>
+
+            <div class="a-text tough-text">
+                @Model.Toughness
+            </div>
+        </div>
+
+        <div class="rar-ill-text">
+            <div class="a-text rare-text">
+                @Model.Rarity
+            </div>
+
+            <div class="a-text illus-text">
+                @Model.Illustrator
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex" class="mt-5 row justify-content-center mb-5">
+
+        <div class="col-sm-2">
+            <form action="/Cards/UpdateCard/@Model.CardId">
+                <input type="submit" value="Update">
+            </form>
+        </div>
+
+        <div class="col-sm-2">
+            @using (Html.BeginForm("DeleteCard", "Cards", "Post"))
+            {
+                <form>
+                    <input type="hidden" asp-for="CardId" name="CardId" value="@Model.CardId"/>
+                    <input type="submit" onclick="return confirm('Are you sure?')" value="Delete"/>
                 </form>
-            </div>
-
-            <div class="col-sm-2">
-                @using (Html.BeginForm("DeleteCard", "Cards", "Post"))
-                {
-                    <form>
-                        <input type="hidden" asp-for="CardId" name="CardId" value="@Model.CardId" />
-                        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete" />
-                    </form>
-                }
-            </div>
+            }
         </div>
+    </div>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
- </div>
-
+</div>

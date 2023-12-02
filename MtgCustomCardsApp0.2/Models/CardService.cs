@@ -35,7 +35,7 @@ public class CardService : ICardService
 
     public async Task<IEnumerable<Card>> GetCardsForUser(uint userId)
     {
-        return await _conn.QueryAsync<Card, ManaCost, Card>(
+        return await _conn.QueryAsync(
             "SELECT CardID, UserID, CardName as Name, CardText, CardImg, CardFlavorText, CardType as Type, CardSubType as SubType, " +
             "CardPower as Power, CardToughness as Toughness, CardIllustrator as Illustrator, C as Colorless, W as White, U as Blue, B as Black, " +
             "R as Red, G as Green FROM CardData",
@@ -53,7 +53,7 @@ public class CardService : ICardService
                             "CardType as Type, CardSubType as SubType, CardPower as Power, CardToughness as Toughness," + 
                             "CardRarity as Rarity, CardImg, CardIllustrator as Illustrator, C as Colorless, W as White," + 
                             "U as Blue, B as Black, R as Red, G as Green FROM CardData WHERE CardID = @id LIMIT 1";
-        return (await _conn.QueryAsync<Card, ManaCost, Card>(
+        return (await _conn.QueryAsync(
             sql,
             (Card card, ManaCost manaCost) =>
             {
@@ -72,10 +72,10 @@ public class CardService : ICardService
             "CardRarity = @rarity, W = @white, U = @blue, B = @black, R = @red, G = @green, C = @colorless WHERE CardID = @id",
             new
             {
-                name = card.Name, cardImg = card.CardImg, type = @card.Type, subtype = @card.SubType,
-                power = @card.Power, isLegendary = card.IsLegendary, rarity = card.Rarity,
-                toughness = @card.Toughness, text = @card.CardText, flavor = @card.CardFlavorText,
-                illustrator = @card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue,
+                name = card.Name, cardImg = card.CardImg, type = card.Type, subtype = card.SubType,
+                power = card.Power, isLegendary = card.IsLegendary, rarity = card.Rarity,
+                toughness = card.Toughness, text = card.CardText, flavor = card.CardFlavorText,
+                illustrator = card.Illustrator, white = card.CardCost.White, blue = card.CardCost.Blue,
                 black = card.CardCost.Black, red = card.CardCost.Red, green = card.CardCost.Green,
                 colorless = card.CardCost.Colorless, id = card.CardId
             });
